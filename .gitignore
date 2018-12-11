@@ -1,3 +1,4 @@
+/build
 *.log
 *.aux
 *.dvi
@@ -8,3 +9,4 @@
 *.toc
 main.run.xml
 main.synctex.gz
+main-blx.bib
