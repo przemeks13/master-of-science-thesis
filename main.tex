@@ -43,6 +43,18 @@ headsepline, % Uncomment to get a line under the header
 
 \usepackage{mathpazo} % Use the Palatino font by default
 
+\usepackage{verbatim}
+\usepackage{smartdiagram}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+%\usepackage{showframe}
+%\usepackage{fancyhdr}
+%\usepackage[bottom]{footmisc}
+\usepgfplotslibrary{units}
+\usepackage{siunitx}
+
+
 \usepackage[backend=bibtex,style=authoryear,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
 
 \addbibresource{example.bib} % The filename of the bibliography
@@ -258,6 +270,15 @@ $\omega$ & angular frequency & \si{\radian} \\
 % Uncomment the lines as you write the chapters
 
 \include{Chapters/Chapter1}
+\include{Chapters/introduction}
+\include{Chapters/assumptions}
+\include{Chapters/exp_methods}
+\include{Chapters/test_stand}
+\include{Chapters/sensor_selection}
+\include{Chapters/construction_optymization}
+
+%\section{Wyznaczenie charakterystyk}
+\include{Chapters/conclusion}
 
 
 
