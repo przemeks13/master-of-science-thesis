@@ -2,11 +2,14 @@
 *.log
 *.aux
 *.dvi
-*.pdf
 *.out
 *.lot
 *.lof
 *.toc
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
 main.run.xml
 main.synctex.gz
 main-blx.bib
