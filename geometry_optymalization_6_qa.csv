@@ -1,0 +1,6 @@
+Np,próbka,vpp,dt,f,jakość,Uwagi
+1,Ecc_center,19.6,20.8,200,5,Przebieg sinusoidalny gasnący.
+2,Ecfm_center,19.4,20.8,200,4,Przebieg nieokresowy.
+3,Ecs_center,14.7,50,200,4,
+4,Bcc_outside,4.88,11.4,125,3,
+5,Fcc_center,15.8,41,100,4,
