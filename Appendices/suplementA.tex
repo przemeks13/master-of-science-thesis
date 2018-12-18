@@ -3,7 +3,8 @@
 \label{app:suplementA}
 
 \begin{table}[htpb]
-    \caption{Wyniki selekcji przetwornika PVDF}
+    \caption{Parametry sygnałów otrzymanych dla różnych
+     przetworników PVDF w układzie konstrukcyjnym Acc oraz Acf}
     \label{fig:results_sensor_selection}
 
     \centering
@@ -23,4 +24,52 @@
     display columns/5/.style={string type,column name={}}
     ]
     {selekcja_czujnika.csv}
+\end{table}
+
+\begin{table}%[htpb]
+    \caption{Wartości sygnałów otrzymanych z przetwornika 1.1.
+     dla różnych układów konstrukcyjnych}
+    \label{fig:results_11_geometry}
+
+    \centering
+    \pgfplotstabletypeset[
+    col sep = comma,
+    columns = {Np, probka, vpp, dt, jakość, Uwagi },
+    sort,
+    sort cmp={string <},
+    sort key=probka,
+    every head row/.style={before row=\toprule,after row=\midrule},
+    every last row/.style={after row=\bottomrule},
+    % display columns/0/.style={string type,column name={}}
+    display columns/1/.style={string type,column name={}},
+    % display columns/2/.style={string type,column name={}}
+    % display columns/3/.style={string type,column name={}}
+    % display columns/4/.style={string type,column name={}}
+    display columns/5/.style={string type,column name={}}
+    ]
+    {geometry_optymalization_11.csv}
+\end{table}
+
+\begin{table}%[htpb]
+    \caption{Wartości sygnałów otrzymanych z przetwornika 6.
+    dla różnych układów konstrukcyjnych}
+    \label{fig:results_sensor_selection}
+
+    \centering
+    \pgfplotstabletypeset[
+    col sep = comma,
+    columns = {Np, probka, vpp, dt, jakość, Uwagi },
+    sort,
+    sort cmp={string <},
+    sort key=probka,
+    every head row/.style={before row=\toprule,after row=\midrule},
+    every last row/.style={after row=\bottomrule},
+    % display columns/0/.style={string type,column name={}}
+    display columns/1/.style={string type,column name={}},
+    % display columns/2/.style={string type,column name={}}
+    % display columns/3/.style={string type,column name={}}
+    % display columns/4/.style={string type,column name={}}
+    display columns/5/.style={string type,column name={}}
+    ]
+    {geometry_optymalization_6.csv}
 \end{table}
