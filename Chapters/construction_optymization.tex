@@ -1,13 +1,41 @@
 \chapter{Optymalizacja układu geometrycznego}
 \label{sec:construction_optymization}
+
+\newcommand{\tabhead}[1]{\textbf{#1}}
+
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{pictures/uklady_geom.pdf}
 \caption{Szkic badanych układów konstrukcyjnych sensorów piezoelektrycznych.}
 \label{fig:construct_scetch}
 \end{figure}
-Niełatwe rozważania na temat kierunku badań dotyczących konstrukcji sensora zaowocowały ustaleniami o konieczności zbadania przetwornika:
+Niełatwe rozważania na temat kierunku badań dotyczących konstrukcji sensora 
+zaowocowały ustaleniami o konieczności zbadania przetwornika:
 \begin{enumerate}
 \item belkowego ze względu na możliwość odniesienia się do istniejącej literatury(patrz: A na Rys.\ref{fig:construct_scetch}),
 \item o kształcie rury z powodu przeznaczenia konstruowanego przetwornika (patrz: B na Rys.\ref{fig:construct_scetch}),
+\item umieszczonego pomiędzy warstwami miękkiego materiału (patrz: S na Rys.\ref{fig:construct_scetch}),
 \end{enumerate}
+
+% \begin{figure}[htbp]
+% \centering
+\begin{table}
+    \caption{Wyniki optymalizacji pod względem napięcia międzyszczytowego $V_{pp}$}
+    \label{fig:results_opty_vpp}
+
+    \centering
+    \pgfplotstabletypeset[
+    col sep = comma,
+    columns = {probka, vpp},
+    sort,
+    sort cmp={float >},
+    sort key=vpp,
+    % string replace*={_}{\textsubscript},
+    every head row/.style={before row=\toprule,after row=\midrule},
+    every last row/.style={after row=\bottomrule},
+    display columns/0/.style={string type,column name={}}
+    ]
+    {selekcja_czujnika.csv}
+\end{table}
+
+% \end{figure}
