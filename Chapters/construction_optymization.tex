@@ -19,7 +19,7 @@ zaowocowały ustaleniami o konieczności zbadania przetwornika:
 
 % \begin{figure}[htbp]
 % \centering
-\begin{table}
+\begin{table}[htpb]
     \caption{Wyniki optymalizacji pod względem napięcia międzyszczytowego $V_{pp}$}
     \label{fig:results_opty_vpp}
 
@@ -33,7 +33,16 @@ zaowocowały ustaleniami o konieczności zbadania przetwornika:
     % string replace*={_}{\textsubscript},
     every head row/.style={before row=\toprule,after row=\midrule},
     every last row/.style={after row=\bottomrule},
-    display columns/0/.style={string type,column name={}}
+    display columns/1/.style={string type,column name={}},
+    % create on use/sort order/.style={
+    % create col/set list={100,1,2,100,0},
+    % },
+    create on use/newcol/.style={
+        create col/set list={1,2,3}
+    },
+    columns/newcol/.style={string type},
+    columns={newcol,probka,vpp},
+    skip rows between index={3}{20}
     ]
     {selekcja_czujnika.csv}
 \end{table}

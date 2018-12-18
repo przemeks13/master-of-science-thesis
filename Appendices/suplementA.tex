@@ -1,0 +1,26 @@
+\chapter{Zestawienie pomiarów} % Main appendix title
+
+\label{app:suplementA}
+
+\begin{table}[htpb]
+    \caption{Wyniki selekcji przetwornika PVDF}
+    \label{fig:results_sensor_selection}
+
+    \centering
+    \pgfplotstabletypeset[
+    col sep = comma,
+    columns = {Np, probka, vpp, dt, jakość, Uwagi },
+    sort,
+    sort cmp={string <},
+    sort key=probka,
+    every head row/.style={before row=\toprule,after row=\midrule},
+    every last row/.style={after row=\bottomrule},
+    % display columns/0/.style={string type,column name={}}
+    display columns/1/.style={string type,column name={}},
+    % display columns/2/.style={string type,column name={}}
+    % display columns/3/.style={string type,column name={}}
+    % display columns/4/.style={string type,column name={}}
+    display columns/5/.style={string type,column name={}}
+    ]
+    {selekcja_czujnika.csv}
+\end{table}

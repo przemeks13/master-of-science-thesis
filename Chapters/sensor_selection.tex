@@ -42,12 +42,76 @@ Dla każdego pomiaru przeprowadzono po 10 prób, i pozwoliło to zebrać poniżs
 %TODO Tu przydałby się rozkład widmowy sygnału
 
 
+\pgfplotstableread[col sep=comma]{selekcja_czujnika.csv}\sensorSelTab
+
+% \definecolor{YellowBar}{HTML}{FFE300}
+\begin{table}[htbp]
+  \caption{Ranking optymalizacji pod względem napięcia międzyszczytowego $V_{pp}$}
+  \label{fig:sensor_selection_rank_vpp}
+
+  \centering
+  \pgfplotstabletypeset[
+  zerofill,
+  col sep = comma,
+  columns = {Np,probka,vpp},
+  sort,
+  sort cmp={float >},
+  sort key=vpp,
+  every head row/.style={before row=\toprule,after row=\midrule},
+  every last row/.style={after row=\bottomrule},
+  % every row 2/.style={before row={\rowcolor{YellowBar}}},
+  display columns/0/.style={column name={Np.}, column type = {r}},
+  display columns/1/.style={string type,column name={Próbka}, column type = {l}},
+  display columns/2/.style={column name={$V_{pp} [\si{\volt}]$}, column type = {r}, fixed},
+  skip rows between index={4}{20}
+  ]
+  {selekcja_czujnika_vpp.csv}
+\end{table}
+
+\begin{table}[htbp]
+  \caption{Ranking optymalizacji pod względem czasu trwania sygnału $dt$}
+  \label{fig:sensor_selection_rank_dt}
+
+  \centering
+  \pgfplotstabletypeset[
+  col sep = comma,
+  columns = {Np,probka,dt},
+  sort,
+  sort cmp={float <},
+  sort key=dt,
+  every head row/.style={before row=\toprule,after row=\midrule},
+  every last row/.style={after row=\bottomrule},
+  display columns/0/.style={column name={Np.}, column type = {r}},
+  display columns/1/.style={string type,column name={Próbka}, column type = {l}},
+  display columns/2/.style={column name={$dt [\si{\milli\second}]$}}, column type = {r},
+  skip rows between index={4}{20}
+  ]{selekcja_czujnika_dt.csv}
+\end{table}
+
+\begin{table}[htbp]
+  \caption{Ranking optymalizacji pod względem oceny jakości sygnału $Q$}
+  \label{fig:sensor_selection_rank_qa}
+
+  \centering
+  \pgfplotstabletypeset[
+  col sep = comma,
+  columns = {Np,probka,jakość},
+  sort,
+  sort cmp={int >},
+  sort key=jakość,
+  every head row/.style={before row=\toprule,after row=\midrule},
+  every last row/.style={after row=\bottomrule},
+  display columns/0/.style={column name={Np.}, column type = {r}},
+  display columns/1/.style={string type,column name={Próbka}}, column type = {l},
+  display columns/2/.style={column name={$Q [b.j.]$ }, column type = {r}},
+  skip rows between index={4}{20}
+  ]{selekcja_czujnika_qa.csv}
+\end{table}
+
 
 \begin{figure}[htbp]
 \centering
-%\fbox{TUTAJ WYKRES PORÓWNAWCZY SYGNAŁÓW }%\includegraphics[width=\linewidth]{sample}}
 
-\pgfplotstableread[col sep=comma]{selekcja_czujnika.csv}\datatable
 \begin{tikzpicture}
     \begin{axis}[
             ybar,
@@ -58,7 +122,7 @@ Dla każdego pomiaru przeprowadzono po 10 prób, i pozwoliło to zebrać poniżs
                 anchor=north,legend columns=-1},
 %
           xtick=data,
-          xticklabels from table={\datatable}{probka},
+          xticklabels from table={\sensorSelTab}{probka},
           xticklabel style={rotate=60, font=\scriptsize},
           yticklabel style={font=\scriptsize},
             nodes near coords,
@@ -84,7 +148,7 @@ Dla każdego pomiaru przeprowadzono po 10 prób, i pozwoliło to zebrać poniżs
                 anchor=north,legend columns=-1},
 %
           xtick=data,
-          xticklabels from table={\datatable}{probka},
+          xticklabels from table={\sensorSelTab}{probka},
           xticklabel=none,% style={rotate=60, font=\scriptsize},
           yticklabel style={font=\scriptsize},
             nodes near coords,
@@ -109,11 +173,41 @@ Dla każdego pomiaru przeprowadzono po 10 prób, i pozwoliło to zebrać poniżs
 \label{fig:sensor_statistic}
 \end{figure}
 
-Na podstawie Rys.\ref{fig:sensor_statistic} możemy stwierdzić, że najwyższą wartość uzyskanego napięcia $V_{pp}$ otrzymaliśmy dla czujnika oznaczonego numerem \textbf{1.2.} Szacuje się, że wyższa wartość $V_{pp}$ będzie bradziej odporna na szumy pochodzące z maszyny, na której sensor byłby umieszczony. Zgodnie z założeniami przeznaczeniem sensora jest przecież licznik impulsów mechanicznych. Z dużym prawdopodobieństwem można uznać, że wyzwalanie licznika następować będzie na jednym ze zboczy pierwszej półfali lub np. wyprostowanej całej fali sygnału. 
-\indent Odnośnie czasu trwania sygnału jednoznacznie można stwierdzić, że im krótszy tym lepszy. Pozwala to na wyższą częstotliwość wymuszeń mechanicznych bez wystąpienia zjawiska aliasingu. Oczywiście zbyt krótki, o zbyt małej energii może być problematyczny do wychwycenia - będzie wymagać dużej częstotliwości próbkowania.
-\indent Podczas wykonywania pomiarów zauważono ciekawe zaleźności, o których warto wspomnieć przy okazji tego artykułu. Otóż zauważono zależność przebiegu sygnału wyjściowego od rozwiązań konstrukcyjnych zastosowanych w przetworniku. Tak na przykład różnica w zastosowaniu tłumika drgań w postaci gąbki objawia się przede wszystkim czasem trwania sygnału, inaczej mówiąc czasem tłumienia drgań. Jest to wniosek dość oczywisty, jednak warto o nim pamiętać konstruując przetworniki piezoelektryczne. Oprócz tłómików czy filtrów stricte elektrycznych są do dyspozycji również mechaniczne. Gwoli ścisłości w układzie z tłumikiem (patrz: Rys.\ref{fig:scope_with_silencer}) czas wygaszania sgnału wynosi $d_t = TODOs$ i jest krótszy niż w układzie bez tłumika $d_t = TODOs$ (patrz: Rys.\ref{fig:scope_without_silencer}.). Dysproporcja była powtarzalna dla każdego kształtu układu pomiarowego.
+Na podstawie Rys.\ref{fig:sensor_statistic} możena stwierdzić, że najwyższą wartość
+ uzyskanego napięcia $V_{pp}$ otrzymano dla czujnika oznaczonego numerem \textbf{1.2.} 
+ Szacuje się, że wyższa wartość $V_{pp}$ będzie bradziej odporna na szumy pochodzące 
+ z maszyny, na której sensor byłby umieszczony. Zgodnie z założeniami przeznaczeniem 
+ sensora jest przecież licznik impulsów mechanicznych. Z dużym prawdopodobieństwem 
+ można uznać, że wyzwalanie licznika następować będzie na jednym ze zboczy pierwszej 
+ półfali lub np. wyprostowanej całej fali sygnału. 
+ 
+\indent Odnośnie czasu trwania sygnału jednoznacznie można stwierdzić, że im krótszy tym 
+lepszy. Pozwala to na wyższą częstotliwość wymuszeń mechanicznych bez wystąpienia zjawiska 
+aliasingu. Oczywiście zbyt krótki, o zbyt małej energii może być problematyczny do 
+wychwycenia - będzie wymagać dużej częstotliwości próbkowania.
 
-\indent Patrząc dalej na te same próbki pomiarów można również dostrzec, że częstotliwość podstawowej harmonicznej sygnału ma bardzo zbliżoną wartość. Nie jest to przypadek. Dzieje się tak ponieważ jest to główna harmoniczna drgań własnych konstrukcji przetwornika. W tym konkretnym przypadku belki o długości $l = mmTODO$ i jednym punkcie mocowania. Projektując przetwornik naleźy zwrócić uwagę, aby odstroić drgania własne konstrukcji od drgań wymuszających. W innym przypadku uzyskamy szum informacyjny. Dalej ma to również wpływ na projektowanie elektronicznego układu przetwornika. W obwodach AC spodziewa się takich właśnie częstotliwości. W następnym akapicie \ref{sec:construction_optymization} mówi się również o zmianie częstotliwości, gdy konstrukcja jest belką o dwóch punktach podparcia. 
+\indent Podczas wykonywania pomiarów zauważono ciekawe zaleźności, o których warto wspomnieć
+ przy okazji tego artykułu. Otóż zauważono zależność przebiegu sygnału wyjściowego od 
+ rozwiązań konstrukcyjnych zastosowanych w przetworniku. Tak na przykład różnica w 
+ zastosowaniu tłumika drgań w postaci gąbki objawia się przede wszystkim czasem trwania 
+ sygnału, inaczej mówiąc czasem tłumienia drgań. Jest to wniosek dość oczywisty, jednak 
+ warto o nim pamiętać konstruując przetworniki piezoelektryczne. Oprócz tłómików czy 
+ filtrów stricte elektrycznych są do dyspozycji również mechaniczne. Gwoli ścisłości w 
+ układzie z tłumikiem (patrz: Rys.\ref{fig:scope_with_silencer}) czas wygaszania sgnału 
+ wynosi $d_t = TODOs$ i jest krótszy niż w układzie bez tłumika 
+ $d_t = TODOs$ (patrz: Rys.\ref{fig:scope_without_silencer}.). 
+ Dysproporcja była powtarzalna dla każdego kształtu układu pomiarowego.
+
+\indent Patrząc dalej na te same próbki pomiarów można również dostrzec, że częstotliwość 
+podstawowej harmonicznej sygnału ma bardzo zbliżoną wartość. Nie jest to przypadek. 
+Dzieje się tak ponieważ jest to główna harmoniczna drgań własnych konstrukcji przetwornika. 
+W tym konkretnym przypadku belki o długości $l = mmTODO$ i jednym punkcie mocowania. 
+Projektując przetwornik naleźy zwrócić uwagę, aby odstroić drgania własne konstrukcji 
+od drgań wymuszających. W innym przypadku uzyskamy szum informacyjny. Dalej ma to również 
+wpływ na projektowanie elektronicznego układu przetwornika. W obwodach AC spodziewa się 
+takich właśnie częstotliwości. W następnym akapicie \ref{sec:construction_optymization} 
+mówi się również o zmianie częstotliwości, gdy konstrukcja jest belką o dwóch punktach 
+podparcia. 
 
 Napięcie $V_{pp}$ wykazuje się niezmiennością w odniesieniu do przedstawionych zmian w konstrukcji. Jednak jest ono zależne od zupełnie innego parametru, od energii zderzenia. Jest ona bezpośrednią przyczyną ugięcia belki z przetwornikiem. Energia zderzenia, a dokładniej ta stracona, oraz czas kontaktu z belką stanowią ważne parametry dla przebiegu sygnału napięciowego przetwornika. Więcej na ten temat w akapicie \ref{sec:construction_optymization}.
 
