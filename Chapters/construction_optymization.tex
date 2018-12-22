@@ -17,34 +17,126 @@ zaowocowały ustaleniami o konieczności zbadania przetwornika:
 \item umieszczonego pomiędzy warstwami miękkiego materiału (patrz: S na Rys.\ref{fig:construct_scetch}),
 \end{enumerate}
 
-% \begin{figure}[htbp]
-% \centering
+
 \begin{table}[htpb]
     \caption{Wyniki optymalizacji pod względem napięcia międzyszczytowego $V_{pp}$}
-    \label{fig:results_opty_vpp}
+    \label{fig:construction_11_rank_vpp}
 
     \centering
     \pgfplotstabletypeset[
     col sep = comma,
-    columns = {probka, vpp},
+    columns = {Np, probka, vpp},
     sort,
-    sort cmp={float >},
-    sort key=vpp,
-    % string replace*={_}{\textsubscript},
+    sort cmp={int <},
+    sort key=Np,
     every head row/.style={before row=\toprule,after row=\midrule},
     every last row/.style={after row=\bottomrule},
-    display columns/1/.style={string type,column name={}},
-    % create on use/sort order/.style={
-    % create col/set list={100,1,2,100,0},
-    % },
-    create on use/newcol/.style={
-        create col/set list={1,2,3}
-    },
-    columns/newcol/.style={string type},
-    columns={newcol,probka,vpp},
-    skip rows between index={3}{20}
+    display columns/0/.style={column name={Np.}, column type = {r}},
+    display columns/1/.style={string type,column name={Próbka}, column type = {l}},
+    display columns/2/.style={column name={$V_{pp} [\si{\volt}]$}, column type = {r}, fixed},
+    % skip rows between index={5}{20}
     ]
-    {selekcja_czujnika.csv}
+    {geometry_optymalization_11_vpp.csv}
 \end{table}
 
-% \end{figure}
+\begin{table}[htbp]
+    \caption{Ranking optymalizacji pod względem czasu trwania sygnału $dt$}
+    \label{fig:construction_11_rank_dt}
+  
+    \centering
+    \pgfplotstabletypeset[
+    col sep = comma,
+    columns = {Np,probka,dt},
+    sort,
+    sort cmp={int <},
+    sort key=Np,
+    every head row/.style={before row=\toprule,after row=\midrule},
+    every last row/.style={after row=\bottomrule},
+    display columns/0/.style={column name={Np.}, column type = {r}},
+    display columns/1/.style={string type,column name={Próbka}, column type = {l}},
+    display columns/2/.style={column name={$dt [\si{\milli\second}]$}}, column type = {r},
+    skip rows between index={5}{20}
+    ]{geometry_optymalization_11_dt.csv}
+\end{table}
+  
+\begin{table}[htbp]
+    \caption{Ranking optymalizacji pod względem oceny jakości sygnału $Q$}
+    \label{fig:construction_11_rank__qa}
+  
+    \centering
+    \pgfplotstabletypeset[
+    col sep = comma,
+    columns = {Np,probka,jakość},
+    sort,
+    sort cmp={int <},
+    sort key=Np,
+    every head row/.style={before row=\toprule,after row=\midrule},
+    every last row/.style={after row=\bottomrule},
+    display columns/0/.style={column name={Np.}, column type = {r}},
+    display columns/1/.style={string type,column name={Próbka}, column type = {l}},
+    display columns/2/.style={column name={$Q [b.j.]$ }, column type = {r}},
+    skip rows between index={5}{20}
+    ]{geometry_optymalization_11_qa.csv}
+\end{table}
+
+\begin{table}[htpb]
+    \caption{Wyniki optymalizacji pod względem napięcia międzyszczytowego $V_{pp}$}
+    \label{fig:construction_6_rank_vpp}
+
+    \centering
+    \pgfplotstabletypeset[
+    col sep = comma,
+    columns = {Np, probka, vpp},
+    sort,
+    sort cmp={int <},
+    sort key=Np,
+    every head row/.style={before row=\toprule,after row=\midrule},
+    every last row/.style={after row=\bottomrule},
+    display columns/0/.style={column name={Np.}, column type = {r}},
+    display columns/1/.style={string type,column name={Próbka}, column type = {l}},
+    display columns/2/.style={column name={$V_{pp} [\si{\volt}]$}, column type = {r}, fixed},
+    % skip rows between index={5}{20}
+    ]
+    {geometry_optymalization_6_vpp.csv}
+\end{table}
+
+\begin{table}[htbp]
+    \caption{Ranking optymalizacji pod względem czasu trwania sygnału $dt$}
+    \label{fig:construction_6_rank_dt}
+  
+    \centering
+    \pgfplotstabletypeset[
+    col sep = comma,
+    columns = {Np,probka,dt},
+    sort,
+    sort cmp={int <},
+    sort key=Np,
+    every head row/.style={before row=\toprule,after row=\midrule},
+    every last row/.style={after row=\bottomrule},
+    display columns/0/.style={column name={Np.}, column type = {r}},
+    display columns/1/.style={string type,column name={Próbka}, column type = {l}},
+    display columns/2/.style={column name={$dt [\si{\milli\second}]$}}, column type = {r},
+    % skip rows between index={5}{20}
+    ]{geometry_optymalization_6_dt.csv}
+\end{table}
+  
+\begin{table}[htbp]
+    \caption{Ranking optymalizacji pod względem oceny jakości sygnału $Q$}
+    \label{fig:construction_6_rank__qa}
+  
+    \centering
+    \pgfplotstabletypeset[
+    col sep = comma,
+    columns = {Np,probka,jakość},
+    sort,
+    sort cmp={int <},
+    sort key=Np,
+    every head row/.style={before row=\toprule,after row=\midrule},
+    every last row/.style={after row=\bottomrule},
+    display columns/0/.style={column name={Np.}, column type = {r}},
+    display columns/1/.style={string type,column name={Próbka}, column type = {l}},
+    display columns/2/.style={column name={$Q [b.j.]$ }, column type = {r}},
+    % skip rows between index={5}{20}
+    ]{geometry_optymalization_6_qa.csv}
+\end{table}
+

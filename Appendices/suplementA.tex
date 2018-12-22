@@ -26,7 +26,7 @@
     {selekcja_czujnika.csv}
 \end{table}
 
-\begin{table}%[htpb]
+\begin{table}[htpb]
     \caption{Wartości sygnałów otrzymanych z przetwornika 1.1.
      dla różnych układów konstrukcyjnych}
     \label{fig:results_11_geometry}
@@ -36,8 +36,8 @@
     col sep = comma,
     columns = {Np, probka, vpp, dt, jakość, Uwagi },
     sort,
-    sort cmp={string <},
-    sort key=probka,
+    sort cmp={int <},
+    sort key=Np,
     every head row/.style={before row=\toprule,after row=\midrule},
     every last row/.style={after row=\bottomrule},
     % display columns/0/.style={string type,column name={}}
@@ -47,21 +47,21 @@
     % display columns/4/.style={string type,column name={}}
     display columns/5/.style={string type,column name={}}
     ]
-    {geometry_optymalization_11.csv}
+    {geometry_optymization_11.csv}
 \end{table}
 
-\begin{table}%[htpb]
+\begin{table}[htpb]
     \caption{Wartości sygnałów otrzymanych z przetwornika 6.
     dla różnych układów konstrukcyjnych}
-    \label{fig:results_sensor_selection}
+    \label{fig:results_6_geomrtry}
 
     \centering
     \pgfplotstabletypeset[
     col sep = comma,
     columns = {Np, probka, vpp, dt, jakość, Uwagi },
     sort,
-    sort cmp={string <},
-    sort key=probka,
+    sort cmp={int <},
+    sort key=Np,
     every head row/.style={before row=\toprule,after row=\midrule},
     every last row/.style={after row=\bottomrule},
     % display columns/0/.style={string type,column name={}}
