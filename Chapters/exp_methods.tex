@@ -4,7 +4,19 @@ Jednym z najważniejszych aspektów badań było ich zaprojektowanie. Tu najlepi
 
 \begin{figure}[htbp]
 \centering
-\smartdiagramset{back arrow disabled=true}
+\smartdiagramset{
+  set color list={orange, blue,yellow,pink,lime},
+  back arrow disabled=true,
+  uniform connection color=true,
+  description text width=10cm,
+  description font = \normalsize,
+  module minimum height=1cm,
+  descriptive items y sep=2,
+  description title width=1cm,
+  description title text width=2cm,
+  description title font=\scriptsize,
+}
+% \smartdiagramset{}
 \smartdiagram[descriptive diagram]{
 {Założenia, Ustalenie założeń konstrukcyjnych czujnika},
 {Analiza, Separacja założeń mających wpływ na badany układ. },

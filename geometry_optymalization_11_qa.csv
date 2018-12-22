@@ -1,0 +1,23 @@
+Np,probka,vpp,dt,f,jakość,Uwagi
+1,Bcc,2.76,2.2,454,5,Duży współczynnik wypełnienia sygnału. Brak okresowości.
+3,rBcfm,6.68,5,200,5,Jeden okres sygnału trójkątnego
+5,S,8.88,5.8,200,5,Jeden okres sygnału trójkątnego
+6,Bcfm,11,6.4,156.2,5,Jeden okres sygnału trójkątnego
+7,Acfm,15.8,19.6,50,5,
+8,Acc,15.8,23.6,50,5,
+9,Ecc,6.64,52,100,5,
+10,rBcc,2.62,5.8,500,4,
+11,Bcs,12.3,14.4,200,4,
+12,Dcfm,15.8,22.4,250,4,
+13,Fcs,15,24,100,4,
+14,Fcc,13.6,41,100,4,
+15,Fcfm,13.9,46,100,4,
+16,Acs,22,14.4,113.6,3,
+17,Dcc,13.1,18.4,76.9,3,Znacząca zawartość 2. harmonicznej.
+18,Ecfm,10.9,22,100,3,Znacząca zawartość wyższych harmonicznych.
+19,Ecs,10.9,32.4,100,3,Znacząca zawartość wyższych harmonicznych.
+20,rBcs,2.96,33,100,3,
+21,Dcf,14,85,40,3,
+22,Acf,14.9,360,45.45,3,
+23,SA,3.36,11.6,250,2,Znacząca zawartość wyższych harmonicznych. Długotrwały stan nieustalony.
+24,Dcs,14.4,25.6,250,2,
