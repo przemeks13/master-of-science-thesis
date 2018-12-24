@@ -55,8 +55,8 @@ Dla każdego pomiaru przeprowadzono po 10 prób, i pozwoliło to zebrać poniżs
   col sep = comma,
   columns = {Np,probka,vpp},
   sort,
-  sort cmp={float >},
-  sort key=vpp,
+  sort cmp={int >},
+  sort key=Np,
   every head row/.style={before row=\toprule,after row=\midrule},
   every last row/.style={after row=\bottomrule},
   % every row 2/.style={before row={\rowcolor{YellowBar}}},
@@ -209,7 +209,12 @@ takich właśnie częstotliwości. W następnym akapicie \ref{sec:construction_o
 mówi się również o zmianie częstotliwości, gdy konstrukcja jest belką o dwóch punktach 
 podparcia. 
 
-Napięcie $V_{pp}$ wykazuje się niezmiennością w odniesieniu do przedstawionych zmian w konstrukcji. Jednak jest ono zależne od zupełnie innego parametru, od energii zderzenia. Jest ona bezpośrednią przyczyną ugięcia belki z przetwornikiem. Energia zderzenia, a dokładniej ta stracona, oraz czas kontaktu z belką stanowią ważne parametry dla przebiegu sygnału napięciowego przetwornika. Więcej na ten temat w akapicie \ref{sec:construction_optymization}.
+Napięcie $V_{pp}$ wykazuje się niezmiennością w odniesieniu do przedstawionych zmian 
+w konstrukcji. Jednak jest ono zależne od zupełnie innego parametru, od energii zderzenia. 
+Jest ona bezpośrednią przyczyną ugięcia belki z przetwornikiem. Energia zderzenia, 
+a dokładniej ta stracona, oraz czas kontaktu z belką stanowią ważne parametry 
+dla przebiegu sygnału napięciowego przetwornika. Więcej na ten temat w 
+akapicie \ref{sec:construction_optymization}.
 
 \begin{figure}[htbp]
 \centering
