@@ -57,7 +57,7 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
 \usepackage{pgfplotstable}
 
 
-\usepackage[backend=bibtex,style=authoryear,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
+\usepackage[backend=bibtex,style=ieee,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
 
 \addbibresource{example.bib} % The filename of the bibliography
 
@@ -104,7 +104,7 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
 \begin{document}
 
 \frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
-
+% \bibliographystyle{plain}
 \pagestyle{plain} % Default to the plain heading style until the thesis style is called for the body content
 
 %----------------------------------------------------------------------------------------
@@ -222,7 +222,7 @@ The Thesis Abstract is written here (and usually kept to just this page). The pa
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
 
-\printbibliography[heading=bibintoc]
+\printbibliography[title=Literatura]
 
 %----------------------------------------------------------------------------------------
 
