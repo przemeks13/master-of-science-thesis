@@ -73,66 +73,6 @@ płaskownika tak, aby nie fałszowało to przeprowadzanych pomiarów.
 
 \pgfplotstableread[col sep=comma]{selekcja_czujnika.csv}\sensorSelTab
 
-% \definecolor{YellowBar}{HTML}{FFE300}
-\begin{table}[htbp]
-  \caption{Ranking optymalizacji pod względem napięcia międzyszczytowego $V_{pp}$}
-  \label{fig:sensor_selection_rank_vpp}
-
-  \centering
-  \pgfplotstabletypeset[
-  col sep = comma,
-  columns = {Np,probka,vpp},
-  every head row/.style={before row=\toprule,after row=\midrule},
-  every last row/.style={after row=\bottomrule},
-  display columns/0/.style={column name={Np.}, column type = {r}},
-  display columns/1/.style={string type,column name={Próbka}, column type = {l}},
-  display columns/2/.style={column name={$V_{pp} [\si{\volt}]$},
-  precision=2,fixed zerofill, column type = {r}, fixed},
-  skip rows between index={4}{20}
-  ]
-  {selekcja_czujnika_vpp.csv}
-\end{table}
-
-\begin{table}[htbp]
-  \caption{Ranking optymalizacji pod względem czasu trwania sygnału $dt$}
-  \label{fig:sensor_selection_rank_dt}
-
-  \centering
-  \pgfplotstabletypeset[
-  col sep = comma,
-  columns = {Np,probka,dt},
-  sort,
-  sort cmp={float <},
-  sort key=dt,
-  every head row/.style={before row=\toprule,after row=\midrule},
-  every last row/.style={after row=\bottomrule},
-  display columns/0/.style={column name={Np.}, column type = {r}},
-  display columns/1/.style={string type,column name={Próbka}, column type = {l}},
-  display columns/2/.style={column name={$dt [\si{\milli\second}]$}}, column type = {r},
-  skip rows between index={4}{20}
-  ]{selekcja_czujnika_dt.csv}
-\end{table}
-
-\begin{table}[htbp]
-  \caption{Ranking optymalizacji pod względem oceny jakości sygnału $Q$}
-  \label{fig:sensor_selection_rank_qa}
-
-  \centering
-  \pgfplotstabletypeset[
-  col sep = comma,
-  columns = {Np,probka,jakość},
-  sort,
-  sort cmp={int >},
-  sort key=jakość,
-  every head row/.style={before row=\toprule,after row=\midrule},
-  every last row/.style={after row=\bottomrule},
-  display columns/0/.style={column name={Np.}, column type = {r}},
-  display columns/1/.style={string type,column name={Próbka}, column type = {l}},
-  display columns/2/.style={column name={$Q [b.j.]$ }, column type = {r}},
-  skip rows between index={4}{20}
-  ]{selekcja_czujnika_qa.csv}
-\end{table}
-
 
 \begin{figure}[htbp]
   \centering
@@ -191,22 +131,98 @@ płaskownika tak, aby nie fałszowało to przeprowadzanych pomiarów.
 
 \end{tikzpicture}
 
-\caption{Zestawienie parametrów sygnałów dla poszczególnych czujników.}
+\caption{Zestawienie parametrów sygnałów dla poszczególnych czujników na
+ podstawie tablicy \ref{fig:results_sensor_selection}.}
 \label{fig:sensor_statistic}
 \end{figure}
 
-Na podstawie Rys.\ref{fig:sensor_statistic} możena stwierdzić, że najwyższą wartość
- uzyskanego napięcia $V_{pp}$ otrzymano dla czujnika oznaczonego numerem \textbf{1.1.} 
- Szacuje się, że wyższa wartość $V_{pp}$ będzie bradziej odporna na szumy pochodzące 
+
+\indent Na podstawie rys.\ref{fig:sensor_statistic} można stwierdzić, że najwyższą wartość
+ uzyskanego napięcia $V_{pp}$ otrzymano dla czujnika oznaczonego numerem \textbf{6}.
+ Nie gorzej wypadł w tej klasyfikacji przetwornik \textbf{1.1.} Biorąc pod uwagę
+ niepewność pomiarową można stwierdzić, że prowadzenie czujnika 6. jest pomijalnie małe.
+ Ranking 5 próbek o najlepszych rezultatach przedstawiono dla czytelności w tablicy 
+ \ref{fig:sensor_selection_rank_vpp}. 
+ \indent Szacuje się, że wyższa wartość $V_{pp}$ będzie bradziej odporna na szumy pochodzące 
  z maszyny, na której sensor byłby umieszczony. Zgodnie z założeniami przeznaczeniem 
  sensora jest przecież licznik impulsów mechanicznych. Z dużym prawdopodobieństwem 
  można uznać, że wyzwalanie licznika następować będzie na jednym ze zboczy pierwszej 
- półfali lub np. wyprostowanej całej fali sygnału. 
+ półfali sygnału. Nieco inaczej będzie to wyglądać w przypadku sygnału wyprostowanego
+ lub nawet stabilizowanego. Takie przekształcenie ułatwi identyfikację wystąpienia 
+ wymuszenia. 
+
+ \indent Spoglądając ponownie na wykres $V_{pp}$ na rys. \ref{fig:sensor_statistic}
+ można dostrzec pewną ciekawą prawidłowość. Otóż, pomijając czujnik 6., którego sposób
+ montażu był nieco inny, wartości napięcia międzyszczytowego dla układów z jedną podporą
+ tłumiącą były niższe niż ich odpowiedniki w układach bez drugiej podpory. Wyjaśnieniem
+ tego zjawiska jest fakt, iż podpora tłumiąca przecidziała wymuszeniu mechanicznemu i 
+ zmniejsza wychylenie belki przetwornika w stosunku do belki wyłącznie z jedną podporą.
+ Uzupełnienie informacji w tym temacie zawiera pozycja \cite{belkowy_sensor}.
+
+
+\begin{table}[htbp]
+  \caption{Ranking optymalizacji pod względem napięcia międzyszczytowego $V_{pp}$}
+  \label{fig:sensor_selection_rank_vpp}
+
+  \centering
+  \pgfplotstabletypeset[
+  col sep = comma,
+  columns = {Np,probka,vpp},
+  every head row/.style={before row=\toprule,after row=\midrule},
+  every last row/.style={after row=\bottomrule},
+  display columns/0/.style={column name={Np.}, column type = {r}},
+  display columns/1/.style={string type,column name={Próbka}, column type = {l}},
+  display columns/2/.style={column name={$V_{pp} [\si{\volt}]$},
+  precision=2,fixed zerofill, column type = {r}, fixed},
+  skip rows between index={4}{20}
+  ]
+  {selekcja_czujnika_vpp.csv}
+\end{table}
  
-\indent Odnośnie czasu trwania sygnału jednoznacznie można stwierdzić, że im krótszy tym 
+\indent Odnosząc się do czasu trwania sygnału jednoznacznie można stwierdzić, że im krótszy tym 
 lepszy. Pozwala to na wyższą częstotliwość wymuszeń mechanicznych bez wystąpienia zjawiska 
 aliasingu. Oczywiście zbyt krótki, o zbyt małej energii może być problematyczny do 
-wychwycenia - będzie wymagać dużej częstotliwości próbkowania.
+wychwycenia - będzie wymagać dużej częstotliwości przełączania układu bramkującego 
+
+\begin{table}[htbp]
+  \caption{Ranking optymalizacji pod względem czasu trwania sygnału $dt$}
+  \label{fig:sensor_selection_rank_dt}
+
+  \centering
+  \pgfplotstabletypeset[
+  col sep = comma,
+  columns = {Np,probka,dt},
+  sort,
+  sort cmp={float <},
+  sort key=dt,
+  every head row/.style={before row=\toprule,after row=\midrule},
+  every last row/.style={after row=\bottomrule},
+  display columns/0/.style={column name={Np.}, column type = {r}},
+  display columns/1/.style={string type,column name={Próbka}, column type = {l}},
+  display columns/2/.style={column name={$dt [\si{\milli\second}]$}}, column type = {r},
+  skip rows between index={4}{20}
+  ]{selekcja_czujnika_dt.csv}
+\end{table}
+
+\begin{table}[htbp]
+  \caption{Ranking optymalizacji pod względem oceny jakości sygnału $Q$}
+  \label{fig:sensor_selection_rank_qa}
+
+  \centering
+  \pgfplotstabletypeset[
+  col sep = comma,
+  columns = {Np,probka,jakość},
+  sort,
+  sort cmp={int >},
+  sort key=jakość,
+  every head row/.style={before row=\toprule,after row=\midrule},
+  every last row/.style={after row=\bottomrule},
+  display columns/0/.style={column name={Np.}, column type = {r}},
+  display columns/1/.style={string type,column name={Próbka}, column type = {l}},
+  display columns/2/.style={column name={$Q [b.j.]$ }, column type = {r}},
+  skip rows between index={4}{20}
+  ]{selekcja_czujnika_qa.csv}
+\end{table}
 
 \indent Podczas wykonywania pomiarów zauważono ciekawe zaleźności, o których warto wspomnieć
  przy okazji tego artykułu. Otóż zauważono zależność przebiegu sygnału wyjściowego od 
