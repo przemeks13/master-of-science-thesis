@@ -1,8 +1,16 @@
 %sekcja wyboru czujnika piezo
 \chapter{Selekcja czujnika}
 \label{sec:sensor_selection}
-Równolegle z pracami nad stanowiskiem badawczym przeprowadzono przegląd dostępnych na rynku przetworników piezoelektrycznych. Uwagę skoncentrowano przede wszystkim na przetwornikach PVDF\cite{PVDF:15}
-%\footnote{Polifluorek winylidenu - materiał piezoelektryczny charakteryzujący się elastycznością.} 
+
+\section{Przegląd rynku piezoelektryków}
+\label{sec:piezoelectric_research}
+
+Równolegle z pracami nad stanowiskiem badawczym przeprowadzono przegląd dostępnych
+na rynku przetworników piezoelektrycznych. Uwagę skoncentrowano przede wszystkim 
+na przetwornikach PVDF
+\footnote{Polifluorek winylidenu - 
+materiał piezoelektryczny charakteryzujący się elastycznością.}
+
 Do badań wybrano 6 konkretnych produktów (patrz: Rys.\ref{fig:sensors}.):
 
 \begin{enumerate}
@@ -15,16 +23,23 @@ Do badań wybrano 6 konkretnych produktów (patrz: Rys.\ref{fig:sensors}.):
 \end{enumerate}
 
 
-\begin{figure}[htbp]
+\begin{figure}[htpb]
 \centering
-%\fbox{
 \includegraphics[width=\linewidth]{pictures/sensors.jpg}
-%}
 \caption{Badane przetworniki piezoelektryczne.}
 \label{fig:sensors}
 \end{figure}
 
-Aby dokonać selekcji przetwornika wybrano najprostszy układ geometryczny (patrz: Rys. \ref{fig:sensor_sel_geometry}). Został on wykonany z fragmentu tworzywa sztucznego. Układ oznaczono tak, aby można było ustawić go ponownie w tej samej pozycji po wymianie sensora. Sensor przyklejano na taśmę dwustronną o grubości ok w ustalonym uprzednio miejscu. $1.5mm$. 
+\section{Wybór optymalnego przetwornika}
+\label{sec:optimal_piezoelectric_selection}
+
+Aby dokonać selekcji przetwornika wybrano najprostszy, belkowy układ konstrukcyjny 
+(patrz: Rys. \ref{fig:sensor_sel_geometry}). Został on wykonany z fragmentu 
+tworzywa sztucznego. Układ oznaczono tak, aby można było ustawić go ponownie 
+w tej samej pozycji po wymianie sensora. Sensor przyklejano na taśmę dwustronną 
+o grubości ok. $ d = 1.5 mm$ w ustalonym uprzednio miejscu. Na temat
+belkowych przetworników piezoelektrycznych można dowiedzieć się więcej 
+z pozycji literaturowej \cite{belkowy_sensor}. 
 
 \begin{figure}[htbp]
 \centering
@@ -33,12 +48,24 @@ Aby dokonać selekcji przetwornika wybrano najprostszy układ geometryczny (patr
 \label{fig:sensor_sel_geometry}
 \end{figure}
 
-Dla uzyskania szerszego spektrum danych dla każdego czujniaka powtarzano poamiary w dwóch wariantach: 
+W celu uzyskania szerszego spektrum danych dla każdego czujniaka wykonano
+poamiary w dwóch wariantach: 
 \begin{enumerate}
 \item stała podpora na jednym z końców układu przetwornika, drugi koniec swobodny,
-\item stała podpora na jednym z końców układu przetwornika, drugi koniec z amortyzatorem z gąbki.
+\item stała podpora na jednym z końców układu przetwornika, drugi koniec z 
+amortyzatorem z gąbki.
 \end{enumerate}
-Dla każdego pomiaru przeprowadzono po 10 prób, i pozwoliło to zebrać poniższe wyniki. Parametry, jakie wzięto pod uwagę przy ocenie jakości sygnału, to czas trwania ( od inicjalizacji do wygaszenia ) oraz wartość napięcia międzyszczytowego oznaczanych dalej odpowiednio $t_d$ i $V_{pp}$. Ich porównanie po statystycznej analizie przedstawiono na Rys.\ref{fig:sensor_statistic}. Trzeci niebieski słupek w skali od $0\div5$ oznacza subiektywną ocenę poziomu zniekształcenia otrzymanego sygnału. Podczas badań zwracano również uwagę na sposób przyklejenia przetwornika do plastikowego płaskownika tak, aby nie fałszowało to przeprowadzanych pomiarów. 
+
+Dla każdego pomiaru przeprowadzono po 10 prób, co pozwoliło zebrać dane zawarte w tabeli
+\ref{fig:results_sensor_selection}. Dane zostały wstępnie obrobione, to znaczy zestawiono
+je w ujęciu statystycznym.
+Parametry, jakie wzięto pod uwagę przy ocenie jakości sygnału, to czas trwania 
+( od inicjalizacji do wygaszenia ) oraz wartość napięcia międzyszczytowego oznaczanych 
+dalej odpowiednio $t_d$ i $V_{pp}$. Ich porównanie po statystycznej analizie 
+przedstawiono na Rys.\ref{fig:sensor_statistic}. Trzeci niebieski słupek w skali 
+od $0\div5$ oznacza subiektywną ocenę poziomu zniekształcenia otrzymanego sygnału. 
+Podczas badań zwracano również uwagę na sposób przyklejenia przetwornika do plastikowego 
+płaskownika tak, aby nie fałszowało to przeprowadzanych pomiarów. 
 %TODO Tu przydałby się rozkład widmowy sygnału
 
 
@@ -51,18 +78,19 @@ Dla każdego pomiaru przeprowadzono po 10 prób, i pozwoliło to zebrać poniżs
 
   \centering
   \pgfplotstabletypeset[
-  zerofill,
+  % zerofill,
   col sep = comma,
   columns = {Np,probka,vpp},
-  sort,
-  sort cmp={int >},
-  sort key=Np,
+  % sort,
+  % sort cmp={int <},
+  % sort key=Np,
   every head row/.style={before row=\toprule,after row=\midrule},
   every last row/.style={after row=\bottomrule},
   % every row 2/.style={before row={\rowcolor{YellowBar}}},
   display columns/0/.style={column name={Np.}, column type = {r}},
   display columns/1/.style={string type,column name={Próbka}, column type = {l}},
-  display columns/2/.style={column name={$V_{pp} [\si{\volt}]$}, column type = {r}, fixed},
+  display columns/2/.style={column name={$V_{pp} [\si{\volt}]$},
+  precision=2,fixed zerofill, column type = {r}, fixed},
   skip rows between index={4}{20}
   ]
   {selekcja_czujnika_vpp.csv}
@@ -109,25 +137,48 @@ Dla każdego pomiaru przeprowadzono po 10 prób, i pozwoliło to zebrać poniżs
 \end{table}
 
 
+% \pgfplotsset{compat=1.12}
+
+
 \begin{figure}[htbp]
 \centering
 
 \begin{tikzpicture}
+
+  \pgfplotsset{
+    width=\textwidth,
+    height=\textwidth,
+    grid=major,
+    major grid style={dotted},
+    % symbolic x coords={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
+  %  enlarge y limits={upper,value=0.05},
+  %  legend style={
+  %     fill,
+  %     at={(0.50,-0.2)},
+  %     legend columns=2,
+  %     legend cell align=left,
+  %     anchor=north
+  %     },
+   }
     \begin{axis}[
             ybar,
+            % ymode =log,
             bar width=.05cm,
-            width=0.5\textwidth,
-            height=.5\textwidth,
+            width=\textwidth,
+            height=\textwidth,
             legend style={at={(0.5,1)},
                 anchor=north,legend columns=-1},
+                major x tick style = transparent,
 %
+          % symbolic x coords {1,}},
           xtick=data,
           xticklabels from table={\sensorSelTab}{probka},
           xticklabel style={rotate=60, font=\scriptsize},
           yticklabel style={font=\scriptsize},
             nodes near coords,
-%            nodes near coords align={vertical},
+           nodes near coords align={vertical},
             nodes near coords style={rotate=90, font=\scriptsize, anchor=west},
+            % enlarge x limits=0.25,
             ymin=0,ymax=50,
             xlabel style={at={(0,0.05)}, font=\scriptsize},
             ylabel style={font=\scriptsize},
@@ -142,31 +193,22 @@ Dla każdego pomiaru przeprowadzono po 10 prób, i pozwoliło to zebrać poniżs
             axis x line=none,
             ybar,
             bar width=.05cm,
-            width=0.5\textwidth,
-            height=.5\textwidth,
+            width=\textwidth,
+            height=\textwidth,
             legend style={at={(0.5,1)},
                 anchor=north,legend columns=-1},
 %
-          xtick=data,
-          xticklabels from table={\sensorSelTab}{probka},
           xticklabel=none,% style={rotate=60, font=\scriptsize},
-          yticklabel style={font=\scriptsize},
+          major x tick style = transparent,
             nodes near coords,
-%            nodes near coords align={vertical},
+           nodes near coords align={vertical},
             nodes near coords style={rotate=90, font=\scriptsize, anchor=west},
             ymin=0,ymax=5,
-            %xlabel style={at={(0,0.05)}, font=\scriptsize},
             ylabel style={font=\scriptsize},
-            %xlabel={próbka},
-            %ylabel={$vpp[V]$, $td[ms]$},
         ]
-        \addplot table[x expr=\coordindex,y=jakość, col sep=comma]{selekcja_czujnika.csv};
-%%        \addplot table[x=interval,y=carD]{\mydata};
-%%        \addplot table[x=interval,y=carR]{\mydata};
-%%        \legend{Trips, Distance, Energy}
+        \addplot table[x expr=\coordindex,y=jakość, col sep=comma]
+        {selekcja_czujnika.csv};
     \end{axis}
-%\caption{Zestawienie parametrów sygnałów dla poszczególnych czujników.}
-%\label{fig:sensor_statistic}
 \end{tikzpicture}
 
 \caption{Zestawienie parametrów sygnałów dla poszczególnych czujników.}
