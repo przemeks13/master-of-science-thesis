@@ -62,9 +62,11 @@ je w ujęciu statystycznym.
 Parametry, jakie wzięto pod uwagę przy ocenie jakości sygnału, to czas trwania 
 ( od inicjalizacji do wygaszenia ) oraz wartość napięcia międzyszczytowego oznaczanych 
 dalej odpowiednio $t_d$ i $V_{pp}$. Ich porównanie po statystycznej analizie 
-przedstawiono na Rys.\ref{fig:sensor_statistic}. Trzeci niebieski słupek w skali 
-od $0\div5$ oznacza subiektywną ocenę poziomu zniekształcenia otrzymanego sygnału. 
-Podczas badań zwracano również uwagę na sposób przyklejenia przetwornika do plastikowego 
+przedstawiono na Rys.\ref{fig:sensor_statistic}. Wykres oceny jakości sygnału w skali $0\div5$ 
+oznacza subiektywną ocenę poziomu zniekształcenia otrzymanego sygnału. Ocena 0 oznacza mocno
+zniekształcony sygnał (patrz: rys. \ref{fig:distorted_signal}) , natomiast 5 sygnał nieodkształcony 
+lub odkszktałcony w minimalnym stopniu (patrz: rys. \ref{fig:ideal_signal}). 
+Należy nadmienić, że podczas badań zwracano uwagę na sposób przyklejenia przetwornika do plastikowego 
 płaskownika tak, aby nie fałszowało to przeprowadzanych pomiarów. 
 %TODO Tu przydałby się rozkład widmowy sygnału
 
@@ -78,15 +80,10 @@ płaskownika tak, aby nie fałszowało to przeprowadzanych pomiarów.
 
   \centering
   \pgfplotstabletypeset[
-  % zerofill,
   col sep = comma,
   columns = {Np,probka,vpp},
-  % sort,
-  % sort cmp={int <},
-  % sort key=Np,
   every head row/.style={before row=\toprule,after row=\midrule},
   every last row/.style={after row=\bottomrule},
-  % every row 2/.style={before row={\rowcolor{YellowBar}}},
   display columns/0/.style={column name={Np.}, column type = {r}},
   display columns/1/.style={string type,column name={Próbka}, column type = {l}},
   display columns/2/.style={column name={$V_{pp} [\si{\volt}]$},
@@ -137,78 +134,61 @@ płaskownika tak, aby nie fałszowało to przeprowadzanych pomiarów.
 \end{table}
 
 
-% \pgfplotsset{compat=1.12}
-
-
 \begin{figure}[htbp]
-\centering
-
+  \centering
+  
+\pgfplotsset{compat=1.12}
 \begin{tikzpicture}
 
-  \pgfplotsset{
+  \begin{groupplot}[
+    group style={
+        group name=my fancy plots,
+        group size=1 by 3,
+        xticklabels at=edge bottom,
+        xlabels at = edge bottom,
+        vertical sep=25pt
+    },
+    ybar,
+    /pgf/bar width=1,
+    ymin=0,
     width=\textwidth,
-    height=\textwidth,
-    grid=major,
-    major grid style={dotted},
-    % symbolic x coords={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
-  %  enlarge y limits={upper,value=0.05},
-  %  legend style={
-  %     fill,
-  %     at={(0.50,-0.2)},
-  %     legend columns=2,
-  %     legend cell align=left,
-  %     anchor=north
-  %     },
-   }
-    \begin{axis}[
-            ybar,
-            % ymode =log,
-            bar width=.05cm,
-            width=\textwidth,
-            height=\textwidth,
-            legend style={at={(0.5,1)},
-                anchor=north,legend columns=-1},
-                major x tick style = transparent,
-%
-          % symbolic x coords {1,}},
-          xtick=data,
-          xticklabels from table={\sensorSelTab}{probka},
-          xticklabel style={rotate=60, font=\scriptsize},
-          yticklabel style={font=\scriptsize},
-            nodes near coords,
-           nodes near coords align={vertical},
-            nodes near coords style={rotate=90, font=\scriptsize, anchor=west},
-            % enlarge x limits=0.25,
-            ymin=0,ymax=50,
-            xlabel style={at={(0,0.05)}, font=\scriptsize},
-            ylabel style={font=\scriptsize},
-            xlabel={próbka},
-            ylabel={$vpp[V]$, $td[ms]$},
-        ]
-        \addplot table[x expr=\coordindex,y=vpp, col sep=comma]{selekcja_czujnika.csv};
-        \addplot table[x expr=\coordindex,y=dt, col sep=comma]{selekcja_czujnika.csv};
-        \end{axis}
-        \begin{axis}[
-            axis y line*=right,
-            axis x line=none,
-            ybar,
-            bar width=.05cm,
-            width=\textwidth,
-            height=\textwidth,
-            legend style={at={(0.5,1)},
-                anchor=north,legend columns=-1},
-%
-          xticklabel=none,% style={rotate=60, font=\scriptsize},
-          major x tick style = transparent,
-            nodes near coords,
-           nodes near coords align={vertical},
-            nodes near coords style={rotate=90, font=\scriptsize, anchor=west},
-            ymin=0,ymax=5,
-            ylabel style={font=\scriptsize},
-        ]
-        \addplot table[x expr=\coordindex,y=jakość, col sep=comma]
-        {selekcja_czujnika.csv};
-    \end{axis}
+    height=0.4\textwidth,
+    axis x line=bottom,
+    enlarge x limits=0.25,
+    major x tick style = transparent,
+    xtick=data,
+    xticklabels from table={\sensorSelTab}{probka},
+    xticklabel style={rotate=60, font=\scriptsize},
+    yticklabel style={font=\scriptsize},
+    xlabel style={at={(-0.1,-0.05)}, font=\scriptsize},
+    xlabel={próbka},
+    ylabel style={font=\scriptsize},
+    title style={at={(0.5,1.0)}, font=\footnotesize}, 
+    grid = major,
+    table/x expr=\coordindex,
+    table/col sep=comma,
+]
+
+\nextgroupplot[ylabel={$V_{pp}[V]$},
+               ymax=30,
+               ytick distance = 10,
+               title={Maksymalne napięcie międzyszczytowe},
+              ]
+\addplot [fill = red] table[y=vpp]{selekcja_czujnika.csv};     
+
+\nextgroupplot[ymode=log,
+               ylabel={$t_d[ms]$},
+               title={Czas trwania sygnału},
+               ]
+\addplot [fill = green] table[y=dt]{selekcja_czujnika.csv};;
+\nextgroupplot[ymax=5,
+               ylabel={$Q[b.j.]$},
+               ytick distance = 1,
+               title={Ocena jakości sygnału},
+               ]
+\addplot [fill = blue] table[y=jakość]{selekcja_czujnika.csv};                 
+\end{groupplot}
+
 \end{tikzpicture}
 
 \caption{Zestawienie parametrów sygnałów dla poszczególnych czujników.}
@@ -216,7 +196,7 @@ płaskownika tak, aby nie fałszowało to przeprowadzanych pomiarów.
 \end{figure}
 
 Na podstawie Rys.\ref{fig:sensor_statistic} możena stwierdzić, że najwyższą wartość
- uzyskanego napięcia $V_{pp}$ otrzymano dla czujnika oznaczonego numerem \textbf{1.2.} 
+ uzyskanego napięcia $V_{pp}$ otrzymano dla czujnika oznaczonego numerem \textbf{1.1.} 
  Szacuje się, że wyższa wartość $V_{pp}$ będzie bradziej odporna na szumy pochodzące 
  z maszyny, na której sensor byłby umieszczony. Zgodnie z założeniami przeznaczeniem 
  sensora jest przecież licznik impulsów mechanicznych. Z dużym prawdopodobieństwem 
