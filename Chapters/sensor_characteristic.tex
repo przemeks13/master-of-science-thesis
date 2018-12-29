@@ -1,4 +1,4 @@
-\chapter{Charakterystyki przetworników}
+\chapter{Charakterystyki wyjściowe przetworników}
 \label{sec:sensor_characteristic}
 
 \section{Założenia}
@@ -17,11 +17,109 @@ jedno z przewidzianych rozwiązań konstrukcyjnych nadaje się do zastosowania w
 układzie (patrz: rozdział \ref{sec:assumptions}). W wyborze kierowano się również
 oceną możliwości montażu tak przygotowanego przetwornika.
 
-\section{Badanie konsrukcji S z czujnikiem 1.1.}
-\label{sec:sensor_characteristic_11S}
+\section{Otrzymane charakterkystyki}
+\label{sec:sensor_characteristic_td}
 
-\section{Badanie konstrukcji rBcc z czujnikiem 1.1.}
-\label{sec:sensor_characteristic_11rBcc}
+\indent Poniżej na rys. \ref{fig:tdEc_char} oraz \ref{fig:vppEc_char} przedstawiono
+charakterystyki wyjściowe dla wybranych konstrukcji przetworników piezoelektrycznych.
+Uzasadnienie wyboru pokazano w sekcji \ref{sec:sensor_characteristic_assumptions}. 
+Otrzymane charakterystyki zostaną krótko skomentowane. Charakterystyka 
+$t_d(E_C)$ (patrz: rys. \ref{fig:tdEc_char}) wykazuje stałość czasu tłumienia
+od energii kinetycznej ciała M tuż przed zderzeniem. Jedynie dla układu $1.1rBcc$
+początkowe wartości $t_d$ są  nieco wyższe od pozostałych. Energia zderzenia, a zatem
+napięcie $u_{pp}$ były wtedy na tyle małe, że czas trwania sygnału przy pomocy
+użytych przyrządów pomiarowych (kursorów na oscyloskopie) był trudny do odczytania.
+Można zatem stwoierdzić, że te dwie próbki są grubym błędem pomiarowym i prawdopodobnie
+zadziałał tu efekt autosugestii przy wykonywaniu pomiarów. Głównym wnioskiem z 
+otrzymanych zależności $t_d(E_C)$ jest to, że czas tłumienia sygnału nie jest zależny
+od siły uderzenia w przetwornik, a od stałej tłumienia konstrukcji przetwornika. 
 
-\section{Badanie konstrukcji rBcc z czujnikiem 6}
-\label{sec:sensor_characteristic_6rBcc}
+\indent Odnosząc się do zależności $u_{pp}(E_C)$ ( patrz: \ref{fig:vppEc_char})
+należy zauważyć, że wraz ze wzrostem energii uderzenia rośnie wartość napięcia
+międzyszczytowego $u_{pp}$. Interesujący jest kształt tendencji rosnącej.
+Niepodważalnym jest, że przy wyższych wartościach $E_C$ na okreśclony przyrost
+$\delta E_C$ przypada mniejszy przyrost $\delta u_{pp}$. Mówiąc krócej, pochodna
+$\frac{ du_{pp}}{dE_C}$ maleje wraz ze wzrostem $E_C$. Wniosek jaki należy wyciągnąć
+z tych zależności to odnalezienie przyczyny takiego kształtu. Otóż poruszono to już w
+podrozdziale \ref{sec:signal_description}. Energia kinetyczna ciała M przed 
+zderzeniem jesst wprost proporcjonalna do kwadratu napięcia międzyszczytowego
+(patrz: zależność \ref{eq:energy_prop}). Te natomiast jest wprost proporcjonalne do
+maksymalnego wychylenia, czyli amplitudy ugięcia belki.
+
+\indent Jeszcze krótko na temat zakresów uzyskanych wartości. Czas tłumienia sygnału
+we wszystkich 3 przypadkach w całym przedziale $E_C$ mieści się w wymaganiach postawionych
+w rozdziale \ref{sec:assumptions} dotyczących częstotliwości występujacych w układzie
+rzeczywistym wymuszeń mechanicznych. Przy czym najlepiej w tym aspekcie prezentuje się
+układ 1.1rBcc, czyli model rury z przyklejonym od zewnątrz przetwornikiem PVDF 1.1.
+Odnośnie napięcia $u_{pp}$ uzyskano przedział wartości $0 \div 22 V$. Głównym problemem
+nie będą tu wysokie, lecz niskie wartości napięcia, przy małych energiach zderzeń. 
+Na stanowisku laboratoryjnym wartości kilkuset $mV$ nie są problematyczne do detekcji.
+W układzie rzyczywistym, gdzie występują szumy może stać się to uciążliwe i należy mieć
+to na uwadze.
+
+\pgfplotsset{width=\linewidth,compat=1.3}
+
+\begin{figure}[htbp]
+\centering
+    \begin{tikzpicture}
+%    \pgfplotsset{
+%    scale only axis,
+%    scaled x ticks=base 10:3,
+%    xmin=0, xmax=0.06
+%}
+      \begin{axis}[
+          width=\linewidth, % Scale the plot to \linewidth
+          grid=major, % Display a grid
+          grid style={dashed,gray!30}, % Set the style
+          xlabel=$E_C$ , % Set the labels
+          ylabel=$t_d$,
+          x unit=\si{\milli\joule}, % Set the respective units
+          y unit=\si{\milli\second},
+          ymin = 0,
+          xmin = 0,
+          mark size = 4pt,
+          title =Charakterystyka $t_d(E_C)$
+          ]
+          \addplot[smooth, only marks, mark=*,red] table[x=Ec,y=dt,col sep=comma] {1.1rBcc_chart.csv};
+          \addplot[smooth, only marks, mark=x,green] table[x=Ec,y=dt,col sep=comma] {1.1S_chart.csv};
+          \addplot[smooth, only marks, mark=o, blue] table[x=Ec,y=dt,col sep=comma] {6rB_center_chart.csv};
+          \legend{{$1.1rBcc$}, {$1.1S$}, {$6rBcc\_center$}}
+        \end{axis}
+    \end{tikzpicture}
+\caption{Charakterystyka czasu trwania sygnału od energii ciała M przed zderzeniem.}
+\label{fig:tdEc_char}
+\end{figure}
+
+
+\begin{figure}[htbp]
+    \centering
+        \begin{tikzpicture}
+    %    \pgfplotsset{
+    %    scale only axis,
+    %    scaled x ticks=base 10:3,
+    %    xmin=0, xmax=0.06
+    %}
+          \begin{axis}[
+              width=\linewidth, % Scale the plot to \linewidth
+              grid=major, % Display a grid
+              grid style={dashed,gray!30}, % Set the style
+              xlabel=$E_C$ , % Set the labels
+              ylabel=$t_d$,
+              x unit=\si{\milli\joule}, % Set the respective units
+              y unit=\si{\milli\second},
+              ymin = 0,
+              xmin = 0,
+              mark size = 4pt,
+              title =Charakterystyka $u_{pp}(E_C)$,
+              legend style = {at={(0.03,0.97)}, anchor = north west}
+              ]
+              \addplot[smooth, only marks, mark=*,red] table[x=Ec,y=vpp,col sep=comma] {1.1rBcc_chart.csv};
+              \addplot[smooth, only marks, mark=x,green] table[x=Ec,y=vpp,col sep=comma] {1.1S_chart.csv};
+              \addplot[smooth, only marks, mark=o, blue] table[x=Ec,y=vpp,col sep=comma] {6rB_center_chart.csv};
+              \legend{{$1.1rBcc$}, {$1.1S$}, {$6rBcc\_center$}}
+            \end{axis}
+        \end{tikzpicture}
+    \caption{Charakterystyka początkowego napięcia międzyszczytowego sygnału od 
+    energii ciała M przed zderzeniem.}
+    \label{fig:vppEc_char}
+    \end{figure}
