@@ -23,12 +23,14 @@ Do badań wybrano 6 konkretnych produktów (patrz: Rys.\ref{fig:sensors}.):
 \end{enumerate}
 
 
-\begin{figure}[htpb]
+\begin{figure}[tbhp]
 \centering
 \includegraphics[width=\linewidth]{pictures/sensors.jpg}
 \caption{Badane przetworniki piezoelektryczne.}
 \label{fig:sensors}
 \end{figure}
+
+\pagebreak
 
 \section{Wybór optymalnego przetwornika}
 \label{sec:optimal_piezoelectric_selection}
@@ -41,17 +43,18 @@ o grubości ok. $ d = 1.5 mm$ w ustalonym uprzednio miejscu. Na temat
 belkowych przetworników piezoelektrycznych można dowiedzieć się więcej 
 z pozycji literaturowej \cite{belkowy_sensor}. 
 
-\begin{figure}[htbp]
+\begin{figure}[tbhp]
 \centering
 \fbox{TUTAJ RYSUNEK GEOMETRII CZUJNIKA }%\includegraphics[width=\linewidth]{sample}}
 \caption{Konstrukcja pozwalająca na selekcję przetwornika piezoelektrycznego.}
 \label{fig:sensor_sel_geometry}
 \end{figure}
 
+\pagebreak 
 W celu uzyskania szerszego spektrum danych dla każdego czujniaka wykonano
 poamiary w dwóch wariantach: 
 \begin{enumerate}
-\item stała podpora na jednym z końców układu przetwornika, drugi koniec swobodny,
+\item stała podpora na jednym z końców układu przetwornika, drugi koniec swobodny,\nopagebreak
 \item stała podpora na jednym z końców układu przetwornika, drugi koniec z 
 amortyzatorem z gąbki.
 \end{enumerate}
@@ -147,7 +150,7 @@ płaskownika tak, aby nie fałszowało to przeprowadzanych pomiarów.
  z maszyny, na której sensor byłby umieszczony. Zgodnie z założeniami przeznaczeniem 
  sensora jest przecież licznik impulsów mechanicznych. Z dużym prawdopodobieństwem 
  można uznać, że wyzwalanie licznika następować będzie na jednym ze zboczy pierwszej 
- półfali sygnału. Nieco inaczej będzie to wyglądać w przypadku sygnału wyprostowanego
+ półfali sygnału (patrz przebieg na rys. \ref{fig:scope_with_silencer}). Nieco inaczej będzie to wyglądać w przypadku sygnału wyprostowanego
  lub nawet stabilizowanego. Takie przekształcenie ułatwi identyfikację wystąpienia 
  wymuszenia. 
 
@@ -160,7 +163,7 @@ płaskownika tak, aby nie fałszowało to przeprowadzanych pomiarów.
  Uzupełnienie informacji w tym temacie zawiera pozycja \cite{belkowy_sensor}.
 
 
-\begin{table}[htbp]
+\begin{table}[h]
   \caption{Ranking optymalizacji pod względem napięcia międzyszczytowego $V_{pp}$}
   \label{fig:sensor_selection_rank_vpp}
 
@@ -179,12 +182,22 @@ płaskownika tak, aby nie fałszowało to przeprowadzanych pomiarów.
   {selekcja_czujnika_vpp.csv}
 \end{table}
  
-\indent Odnosząc się do czasu trwania sygnału jednoznacznie można stwierdzić, że im krótszy tym 
-lepszy. Pozwala to na wyższą częstotliwość wymuszeń mechanicznych bez wystąpienia zjawiska 
-aliasingu. Oczywiście zbyt krótki, o zbyt małej energii może być problematyczny do 
-wychwycenia - będzie wymagać dużej częstotliwości przełączania układu bramkującego 
+\indent Odnosząc się do czasu trwania sygnału jednoznacznie można stwierdzić, 
+że im krótszy tym lepszy. Pozwala to uzyskać wyższą częstotliwość wymuszeń mechanicznych 
+bez wystąpienia zjawiska aliasingu. Oczywiście detekcja zbyt krótkiego sygnału może być 
+problematyczna. Krótkotrwały sygnał wymaga dużej częstotliwości przełączania układu bramkującego.
+Przekłąda się to na szybsze zużycie takiego układu jego cenę oraz dokładność zliczania. 
+Można np. wyobrazić sobie ukłąd bramkujący, który załącza się powyżej pewnego napięcia
+$V_G$, jeżeli utrzymuje się ono powyżej tego poziomu przes czas większy niż czas reakcji 
+obwodu bramkującego $t_{dG}$. Czas ten jest związany przede wszystkim z indukcyjnością 
+obwodu bramkujacego. Jeśli czas trwania sygnału będzie mniejszy niż  $t_{dG}$, 
+impuls nie zostanie wykryty, a więc nie zliczony przez licznik.
+Należy pamiętać, że na etapie projektowym montażu przetwornika nie zawsze znana jest energia
+wymuszenia mechanicznego. Na pewno jeszcze trudniejsze do okereślenia są straty tejże energii
+podczas zderzenia. Powyższe świadczy, że układ przetwornika powininen być odpowiednio
+przewymiarowany ( należy przyjąć współczynnik korekcji ), aby uniknąć błędu zliczania.  
 
-\begin{table}[htbp]
+\begin{table}[h]
   \caption{Ranking optymalizacji pod względem czasu trwania sygnału $dt$}
   \label{fig:sensor_selection_rank_dt}
 
@@ -199,12 +212,24 @@ wychwycenia - będzie wymagać dużej częstotliwości przełączania układu br
   every last row/.style={after row=\bottomrule},
   display columns/0/.style={column name={Np.}, column type = {r}},
   display columns/1/.style={string type,column name={Próbka}, column type = {l}},
-  display columns/2/.style={column name={$dt [\si{\milli\second}]$}}, column type = {r},
+  display columns/2/.style={column name={$dt [\si{\milli\second}]$},
+  precision=2,fixed zerofill, column type = {r}, fixed},
   skip rows between index={4}{20}
   ]{selekcja_czujnika_dt.csv}
 \end{table}
 
-\begin{table}[htbp]
+\indent Przy wyborze przetwornika PVDF o najkorzystniejszych parametrach zdecydowano
+się wziąć pod uwagę jeszcze jedną właściwość. Nazwano ją subiektywną oceną jakości 
+sygnału, czyli kolokwializując wartość "nieodkształcenia sygnału". Jak wcześniej wspomniano
+przyjmuje ona wartośći z przedziału \textbf{$0 \div 5$}, gdzie niższa ocena oznacza
+gorzszą jakość sygnału. Dla poszczególnych modeli przetworników, a właściwie próbek sygnału 
+sporządzono ranking jakości i dla pierwszych 5 pozycji przedstawiono w tablicy 
+\ref{fig:sensor_selection_rank_qa}. Tu przodują czujniki oznaczone \textbf{5}. oraz \textbf{6}., 
+ale nie bez znaczenia pozostaje wymieniany coraz częściej numer \textbf{1.1}.
+ Pełne statystyki znajdują się w ujęciu graficznym na rys. \ref{fig:sensor_statistic}. 
+
+
+\begin{table}[h]
   \caption{Ranking optymalizacji pod względem oceny jakości sygnału $Q$}
   \label{fig:sensor_selection_rank_qa}
 
@@ -224,50 +249,91 @@ wychwycenia - będzie wymagać dużej częstotliwości przełączania układu br
   ]{selekcja_czujnika_qa.csv}
 \end{table}
 
-\indent Podczas wykonywania pomiarów zauważono ciekawe zaleźności, o których warto wspomnieć
- przy okazji tego artykułu. Otóż zauważono zależność przebiegu sygnału wyjściowego od 
- rozwiązań konstrukcyjnych zastosowanych w przetworniku. Tak na przykład różnica w 
- zastosowaniu tłumika drgań w postaci gąbki objawia się przede wszystkim czasem trwania 
- sygnału, inaczej mówiąc czasem tłumienia drgań. Jest to wniosek dość oczywisty, jednak 
- warto o nim pamiętać konstruując przetworniki piezoelektryczne. Oprócz tłómików czy 
- filtrów stricte elektrycznych są do dyspozycji również mechaniczne. Gwoli ścisłości w 
- układzie z tłumikiem (patrz: Rys.\ref{fig:scope_with_silencer}) czas wygaszania sgnału 
- wynosi $d_t = TODOs$ i jest krótszy niż w układzie bez tłumika 
- $d_t = TODOs$ (patrz: Rys.\ref{fig:scope_without_silencer}.). 
- Dysproporcja była powtarzalna dla każdego kształtu układu pomiarowego.
+\section{Odpowiedzi elektryczne przetworników}
+\label{sec:signal_description}
 
-\indent Patrząc dalej na te same próbki pomiarów można również dostrzec, że częstotliwość 
+\indent Podczas wykonywania pomiarów dokonano interesujących obserwacji, o których warto 
+wspomnieć. Otóż zauważono zależności kształtu przebiegu sygnału od poszczególnych 
+rozwiązań konstrukcyjnych zastosowanych w modelu przetwornika. Pierwszą zauważona relacja
+zachodzi pomiędzy stosowaniem tłumienia drgań ( próbki, które w oznaczeniu zawierają małą 
+literę "s" ) a czasem gaśnięcia sygnału $t_d$. Po zastosowaniu tłumika drgań w postaci gąbki $t_d$ 
+znacząco się skraca. Jest to wniosek dość oczywisty, jednak 
+ warto o tym pamiętać konstruując przetworniki piezoelektryczne. Oprócz tłómików czy 
+ filtrów elektrycznych są do dyspozycji również mechaniczne. Dla poparcia przedstawionych
+ wniosków należy sięgnąć do danych pomiarowych zawartych w talbicy \ref{fig:results_sensor_selection}
+ Tak też w układzie z tłumikiem (patrz: Rys.\ref{fig:scope_with_silencer}) czas wygaszania sgnału 
+ wynosi $d_t = 14.40 ms$ i jest krótszy niż w układzie bez tłumika 
+ $d_t = 164.00 ms$ (patrz: Rys.\ref{fig:scope_without_silencer}.). 
+ Znaczna dysproporcja wystąpiła dla każdego kształtu układu pomiarowego.
+
+\indent Analizując dalej wspomniane próbki pomiarów można również dostrzec, że częstotliwość 
 podstawowej harmonicznej sygnału ma bardzo zbliżoną wartość. Nie jest to przypadek. 
 Dzieje się tak ponieważ jest to główna harmoniczna drgań własnych konstrukcji przetwornika. 
-W tym konkretnym przypadku belki o długości $l = mmTODO$ i jednym punkcie mocowania. 
+W tym konkretnym przypadku belki o długości $l = 90 mm$ i jednym punkcie mocowania. 
 Projektując przetwornik naleźy zwrócić uwagę, aby odstroić drgania własne konstrukcji 
-od drgań wymuszających. W innym przypadku uzyskamy szum informacyjny. Dalej ma to również 
-wpływ na projektowanie elektronicznego układu przetwornika. W obwodach AC spodziewa się 
-takich właśnie częstotliwości. W następnym akapicie \ref{sec:construction_optymization} 
-mówi się również o zmianie częstotliwości, gdy konstrukcja jest belką o dwóch punktach 
-podparcia. 
+od drgań wymuszających. W innym przypadku uzyskamy szum informacyjny, dojdzie do tak zwanego
+zjawiska aliasingu, czyli nałożenia się następujących kolejno po sobie sygnałów. Idąc dalej 
+ma to również wpływ na projektowanie elektronicznego układu przetwornika. W obwodach sygnału 
+analogowego spodziewa się właśnie częstotliwości drgań własnych przetwornika. W następnym 
+rozdziale \ref{sec:construction_optymization} porusza się również zagadnienie zmiany częstotliwości, 
+gdy konstrukcja jest belką o dwóch punktach podparcia. 
 
-Napięcie $V_{pp}$ wykazuje się niezmiennością w odniesieniu do przedstawionych zmian 
-w konstrukcji. Jednak jest ono zależne od zupełnie innego parametru, od energii zderzenia. 
-Jest ona bezpośrednią przyczyną ugięcia belki z przetwornikiem. Energia zderzenia, 
-a dokładniej ta stracona, oraz czas kontaktu z belką stanowią ważne parametry 
-dla przebiegu sygnału napięciowego przetwornika. Więcej na ten temat w 
-akapicie \ref{sec:construction_optymization}.
+\indent Napięcie $V_{pp}$ wykazuje się niezmiennością w odniesieniu do przedstawionych do tej pory zmian 
+w konstrukcji. Jednak jest ono zależne od zupełnie innego parametru, od energii ciała M 
+tuż przed zderzeniem. Jest ona bezpośrednią przyczyną ugięcia belki z przetwornikiem. 
+Energia zderzenia, a dokładniej ta stracona, oraz czas kontaktu z belką stanowią ważne parametry 
+dla przebiegu sygnału napięciowego przetwornika. Analizując odpowiedź napięciową jednego z przetworników 
+(patrz: rys. \ref{fig:scope_with_silencer})
+można zauważyć, że w początkowej fazie pierwszy pik napięciowy ma bezwzględną większą wartość niż następny.
+Właściwie oba piki można przybliżyć do gasnącego przebiegu sinusoidalnego. Gdy przeanalizowano kolejne okresy
+sygnału, spostrzeżono, że każdakolejna półfala ma coraz mniejszą amplitudę. Jest tak, ponieważ przy kolejnych
+fazach sygnału belka traci zgromadzoną energię sprężystości. Między innymi jest ona przekształcana w energię
+elektryczną generowaną przez piezoelektryk ( więcej na temeat generatorów piezoelektrycznych można znaleźć w 
+\cite{To_Do}). Istotnie. Również w przedziale czasowym $0 \div T$ ($T$ - okres
+pierwszej harmonicznej sygnału) energia sprężystości belki jest tracona na generację sygnału elektrycznego.
+Co dokładnie dzieje się z przepływem energii? Kiedy rysuje się pierwsza półfala sygnału dochodzi do ugięcia
+belki przez ciało M. W szczycie napięcia $u_{p}$, który odpowiada maksymalnemu ugięciu belki następuje
+zatrzymanie ciała M i cała energia kinetyczna zgromadzona jest w enegii potencjalnej sprężystości belki.
+Następnie belka wraca do pozycji neutralnej i energia potencjalna zamienia się w energię kinetyczną ciała M
+oraz belki przetwornika. Dalej belka wychyla się w stronę przeciwną, ale już bez kontaktu z ciałem M. Rysuje się 
+druga półfala o niższej amplitudzie i przeciwnym znaku. Gdyby pominąć fakt zamiany energii na energię elektryczną
+czynną (obwód pomiarowy nieobciążony) oraz brać pod uwagę sygnał dla konstrukcji bez mechanicznego tłumienia
+można z przebiegu sygnału obliczyć energię przekazaną do belkowego przetwornika. Otóż spełniona jest
+proporcjonalność ze wzoru \ref{eq:energy_prop}. Jeśli wziąć szczyt pierwszej i drugiej półfali
+z rys. \ref{fig:scope_with_silencer}, podstawić do \ref{eq:energy_prop} i podzielić oba równania
+stronami uzyskamy stosunek energii potencjalnych w pierwszym i drugim półokresie. Otrzymana
+w ten sposób wartość stanowi ułamek energii kinetycznej ciała M przed zderzeniem 
+(patrz: rys. \ref{fig:mech_char}) przekazanej skonstruowanemu przetwornikowi piezoelektrycznemu.
 
-\begin{figure}[htbp]
+  
+\begin{equation}[h]
+E_{ps} ~ (\frac{1}{2} \dot u_{p})^2
+\label{eq:energy_prop}
+\end{equation}
+,gdzie $E_{ps}$ - energia potencjalna sprężystości, $u_{p}$ - napięcie szczytowe.
+
+\indent Kiedy otrzymany stosunek oznaczymy przez $k$ to biorc pod uwagę dane zawarte na
+rys. \ref{fig:mech_char} ciało M powinno posiadać po zderzeniu energię wyliczoną według
+zależności \ref{eq:energy_after_crash}.
+
+
+\begin{equation}
+E_{kE} = (1-k)\dot E_C
+\label{eq:energy_after_crash}
+\end{equation}
+
+\indent Do powyższych wniosków wraca się również w rozdziale \ref{sec:construction_optymization}.
+
+\begin{figure}[tbph]
 \centering
-%\fbox{
 \includegraphics[width=\linewidth]{pictures/1Acs15dt.jpg}
-%}
 \caption{Przykładowy przebieg pojedynczego sygnału dla próbki oznaczonej 1.1Acs15dt.}
 \label{fig:scope_without_silencer}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[tbph]
 \centering
-%\fbox{
 \includegraphics[width=\linewidth]{pictures/1Acf15dt.jpg}
-%}
 \caption{Przykładowy przebieg pojedynczego sygnału dla próbki oznaczonej 1.1Acf15dt.}
 \label{fig:scope_with_silencer}
 \end{figure}
