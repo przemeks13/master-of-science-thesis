@@ -103,9 +103,12 @@ lepiej zobrazować wyniki pomiarów zaprezentowano je także w formie wykresu s
 \label{fig:construct_11_statistic}
 \end{figure}
 
-\indent Na wykresie (patrz: rys. \ref{fig:construct_11_statistic}) widać, że rozwiązanie
-konstrukcyjne , jak i
-w talbicy \ref{fig:construction_11_rank_vpp}  
+\indent Na wykresie (patrz: rys. \ref{fig:construct_11_statistic}) można zaobserwować,
+że rozwiązanie konstrukcyjne A osiąga napięcia międzyszczytowe powyżej $20V$,
+co jest najwyższym jest najlepszym rezultatem. Ranking pierwszych pięciu próbek w tym
+aspekcie ukazuje tablica \ref{fig:construction_11_rank_vpp}. Konstrukcje o mniejszej 
+sztywności pozwalają osiągnąć wyższe wartości $U_{pp}.$ Należy zaznaczyć, że każda
+z badanych konstrukcji osiągała napięcie rzędu kilku woltów i więcej.
 
 \begin{table}[h]
     \caption{Ranking optymalizacji konstrukcji pod względem napięcia 
@@ -130,7 +133,12 @@ w talbicy \ref{fig:construction_11_rank_vpp}
     {geometry_optymalization_11_vpp.csv}
 \end{table}
 
-
+\indent W tablicy \ref{fig:construction_11_rank_dt} zamieszczono ranking pierwszych
+pięciu próbek pod względem czasu tłumienia sygnału. Jak napisano wcześniej, im krótszy
+czas tłumienia, tym lepiej. W tym aspekcie najlepiej wypadła konstrukcja B z dwiema
+podporami stałymi. Na podstawie danych pomiarowych można stwierdzić, że im mniej
+stopni swobody belki z przetwornikiem, tym krótszy czas tłumienia, ale również mniejsza
+wartość początkowego napięcia międzyszczytowego.
 
 \begin{table}[h]
     \caption{Ranking optymalizacji konstrukcji pod względem czasu trwania 
@@ -153,6 +161,12 @@ w talbicy \ref{fig:construction_11_rank_vpp}
     skip rows between index={5}{25}
     ]{geometry_optymalization_11_dt.csv}
 \end{table}
+
+\indent Kolejnym aspektem wyboru optymalnego rozwiązania konstrukcyjnego jest subiektywna
+ocena jakości sygnału. Tutaj, większość próbek otrzymało oceny większe lub równe 3. Wyjątkiem
+jest model D, który w przypadku zastosowania tłumika z gąbki wygenerował sygnał o jakości $Q = 2$.
+Dla formalności zamieszczono w tablicy \ref{fig:construction_11_rank__qa} ranking pierwszych 
+pięciu próbek pod względem oceny jakości syganłu.
   
 \begin{table}[h]
     \caption{Ranking optymalizacji konstrukcji pod względem 
@@ -174,6 +188,10 @@ w talbicy \ref{fig:construction_11_rank_vpp}
     skip rows between index={5}{25}
     ]{geometry_optymalization_11_qa.csv}
 \end{table}
+
+\indent Podobnie jak dla przetwornika 1.1. na rys. \ref{fig:construct_6_statistic}
+przedstawiono uzyskane wartości dla czujnika 6. w postaci diagramu słupkowego.
+
 
 \pgfplotstableread[col sep=comma]{geometry_optymalization_6.csv}\constructSelTabAny
 
@@ -234,11 +252,18 @@ w talbicy \ref{fig:construction_11_rank_vpp}
 \end{groupplot}
 \end{tikzpicture}
 
-\caption{Zestawienie parametrów sygnałów dla poszczególnych modeli projektowanego przetwornika na
- podstawie tablicy \ref{fig:results_6_geomrtry}. Czujnik 6.}
-\label{fig:construct_11_statistic}
+\caption{Zestawienie parametrów sygnałów dla poszczególnych modeli projektowanego 
+przetwornika na podstawie tablicy \ref{fig:results_6_geomrtry}. Czujnik 6.}
+\label{fig:construct_6_statistic}
 \end{figure}
 
+\indent Kolejno zaprezentowano również rankingi w postaci tabelarycznej. Analia wyników
+pokazuje, że najwyższą wartość napięcia międzyszczytowego $U_{pp}$ uzyskano dla modelu E
+(patrz: tablica \ref{fig:construction_6_rank_vpp}). Natomiast w przypadku czasu tłumienia
+sygnału ponownie najlepszy rezultat uzyskał model B 
+(patrz: tablica \ref{fig:construction_6_rank_dt}). Z kolei ocenę jakości sygnału trudno
+jest porównać (patrz: tablica \ref{fig:construction_6_rank_qa}) i sprawiedliwie należy
+powiedzieć, że jakość każdego z otrzymanych sygnałów jest dobra i porównywalna.  
 
 
 \begin{table}[h]
@@ -307,3 +332,10 @@ w talbicy \ref{fig:construction_11_rank_vpp}
     ]{geometry_optymalization_6_qa.csv}
 \end{table}
 
+\indent Na podstawie rozważań prowadzonych w tym podrozdziale zdecydowano, że 
+przedstawione zostaną charakterystyki dla 3 układów konstrukcyjnych:
+\begin{itemize}
+    \item odwrócony B z czujnikiem 1.1 i dwiema podporami stałymi - model rury,
+    \item S z czujnikiem 1.1 oraz
+    \item odwrócony B z czujnikiem 6 umieszczonym centralnie i dwiema podporami stałymi.
+\end{itemize}
