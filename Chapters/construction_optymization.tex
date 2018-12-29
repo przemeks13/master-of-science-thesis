@@ -3,6 +3,13 @@
 
 \newcommand{\tabhead}[1]{\textbf{#1}}
 
+\section{Założenia}
+\label{sec:construction_asumptions}
+
+Do badań projektowanej konstrukcji wybrano przetwornik \textbf{1.1}. Ze względu na inny sposób montażu
+i równie dobre wyniki opisane w podrozdziale \ref{sec:sensor_selection} zdecydowano wykorzystać również
+czujnik nr \textbf{6}.
+
 Rozważania na temat kierunku badań dotyczących konstrukcji sensora 
 doprowadziły do decyzji o konieczności zbadania przetwornika:
 \begin{enumerate}
@@ -11,7 +18,7 @@ doprowadziły do decyzji o konieczności zbadania przetwornika:
 \item o kształcie rury z powodu przeznaczenia konstruowanego przetwornika (patrz: B na rys.\ref{fig:construct_scetch}),
 \item umieszczonego pomiędzy warstwami miękkiego materiału (patrz: S na rys.\ref{fig:construct_scetch}),
 \end{enumerate}
-Szczegółowo badane modele przetworników przedstawiono na rys. \ref{fig:construct_scetch}. 
+Szczegółowo badane modele przetworników przedstawiono na rys. \ref{fig:construct_scetch}.
 
 \begin{figure}[bthp]
 \centering
@@ -21,7 +28,86 @@ Szczegółowo badane modele przetworników przedstawiono na rys. \ref{fig:constr
 \end{figure}
 
 
-\begin{table}[htpb]
+\pagebreak
+\section{Wybór optymalnego rozwiązania}
+\label{construction_selection}
+
+\indent Pierwszym krokiem tego etapu badań było pozayskanie parametrów sygnału dla
+różnych układów konstrukcyjnych z zastosowaniem przetwornika \textbf{1.1}. Zebrane
+dane w kompletnej formie znajdują się w tablicy \ref{fig:results_11_geometry}. Aby
+lepiej zobrazować wyniki pomiarów zaprezentowano je także w formie wykresu słupkowego
+( partrz: rys. \ref{fig:construct_11_statistic}). 
+
+
+\pgfplotstableread[col sep=comma]{geometry_optymization_11.csv}\constructSelTab
+
+
+\begin{figure}[htbp]
+  \centering
+  
+\pgfplotsset{compat=1.12}
+\begin{tikzpicture}
+
+  \begin{groupplot}[
+    group style={
+        group name=my fancy plots,
+        group size=1 by 3,
+        xticklabels at=edge bottom,
+        xlabels at = edge bottom,
+        vertical sep=25pt
+    },
+    ybar,
+    /pgf/bar width=1,
+    ymin=0,
+    width=\textwidth,
+    height=0.4\textwidth,
+    axis x line=bottom,
+    enlarge x limits=0.25,
+    major x tick style = transparent,
+    xtick=data,
+    xticklabels from table={\constructSelTab}{probka},
+    xticklabel style={rotate=60, font=\scriptsize},
+    yticklabel style={font=\scriptsize},
+    xlabel style={at={(-0.1,-0.05)}, font=\scriptsize},
+    xlabel={próbka},
+    ylabel style={font=\scriptsize},
+    title style={at={(0.5,1.0)}, font=\footnotesize}, 
+    grid = major,
+    table/x expr=\coordindex,
+    table/col sep=comma,
+]
+
+\nextgroupplot[ylabel={$V_{pp}[V]$},
+               ymax=30,
+               ytick distance = 10,
+               title={Maksymalne napięcie międzyszczytowe},
+              ]
+\addplot [fill = red] table[y=vpp]{\constructSelTab};     
+
+\nextgroupplot[ymode=log,
+               ylabel={$t_d[ms]$},
+               title={Czas trwania sygnału},
+               ]
+\addplot [fill = green] table[y=dt]{\constructSelTab};;
+\nextgroupplot[ymax=5,
+               ylabel={$Q[b.j.]$},
+               ytick distance = 1,
+               title={Ocena jakości sygnału},
+               ]
+\addplot [fill = blue] table[y=jakość]{\constructSelTab};                 
+\end{groupplot}
+\end{tikzpicture}
+
+\caption{Zestawienie parametrów sygnałów dla poszczególnych modeli projektowanego przetwornika na
+ podstawie tablicy \ref{fig:results_11_geometry}. Czujnik 1.1.}
+\label{fig:construct_11_statistic}
+\end{figure}
+
+\indent Na wykresie (patrz: rys. \ref{fig:construct_11_statistic}) widać, że rozwiązanie
+konstrukcyjne , jak i
+w talbicy \ref{fig:construction_11_rank_vpp}  
+
+\begin{table}[h]
     \caption{Ranking optymalizacji konstrukcji pod względem napięcia 
     międzyszczytowego $V_{pp}$ dla czujnika 1.1}
     \label{fig:construction_11_rank_vpp}
@@ -37,13 +123,16 @@ Szczegółowo badane modele przetworników przedstawiono na rys. \ref{fig:constr
     every last row/.style={after row=\bottomrule},
     display columns/0/.style={column name={Np.}, column type = {r}},
     display columns/1/.style={string type,column name={Próbka}, column type = {l}},
-    display columns/2/.style={column name={$V_{pp} [\si{\volt}]$}, column type = {r}, fixed},
+    display columns/2/.style={column name={$V_{pp} [\si{\volt}]$}, column type = {r},
+    precision=2,fixed zerofill, column type = {r}, fixed},
     skip rows between index={5}{25}
     ]
     {geometry_optymalization_11_vpp.csv}
 \end{table}
 
-\begin{table}[htbp]
+
+
+\begin{table}[h]
     \caption{Ranking optymalizacji konstrukcji pod względem czasu trwania 
     sygnału $dt$ dla czujnika 1.1.}
     \label{fig:construction_11_rank_dt}
@@ -59,12 +148,13 @@ Szczegółowo badane modele przetworników przedstawiono na rys. \ref{fig:constr
     every last row/.style={after row=\bottomrule},
     display columns/0/.style={column name={Np.}, column type = {r}},
     display columns/1/.style={string type,column name={Próbka}, column type = {l}},
-    display columns/2/.style={column name={$dt [\si{\milli\second}]$}}, column type = {r},
+    display columns/2/.style={column name={$dt [\si{\milli\second}]$}, column type = {r},
+    precision=2,fixed zerofill, column type = {r}, fixed},
     skip rows between index={5}{25}
     ]{geometry_optymalization_11_dt.csv}
 \end{table}
   
-\begin{table}[htbp]
+\begin{table}[h]
     \caption{Ranking optymalizacji konstrukcji pod względem 
     oceny jakości sygnału $Q$ dla czujnika 1.1.}
     \label{fig:construction_11_rank__qa}
@@ -85,7 +175,73 @@ Szczegółowo badane modele przetworników przedstawiono na rys. \ref{fig:constr
     ]{geometry_optymalization_11_qa.csv}
 \end{table}
 
-\begin{table}[htpb]
+\pgfplotstableread[col sep=comma]{geometry_optymalization_6.csv}\constructSelTabAny
+
+
+\begin{figure}[htbp]
+  \centering
+  
+\pgfplotsset{compat=1.12}
+\begin{tikzpicture}
+
+  \begin{groupplot}[
+    group style={
+        group name=my fancy plots,
+        group size=1 by 3,
+        xticklabels at=edge bottom,
+        xlabels at = edge bottom,
+        vertical sep=25pt
+    },
+    ybar,
+    /pgf/bar width=1,
+    ymin=0,
+    width=\textwidth,
+    height=0.4\textwidth,
+    axis x line=bottom,
+    enlarge x limits=0.25,
+    major x tick style = transparent,
+    xtick=data,
+    xticklabels from table={\constructSelTabAny}{probka},
+    xticklabel style={rotate=60, font=\scriptsize},
+    yticklabel style={font=\scriptsize},
+    xlabel style={at={(-0.1,-0.05)}, font=\scriptsize},
+    xlabel={próbka},
+    ylabel style={font=\scriptsize},
+    title style={at={(0.5,1.0)}, font=\footnotesize}, 
+    grid = major,
+    table/x expr=\coordindex,
+    table/col sep=comma,
+]
+
+\nextgroupplot[ylabel={$V_{pp}[V]$},
+               ymax=30,
+               ytick distance = 10,
+               title={Maksymalne napięcie międzyszczytowe},
+              ]
+\addplot [fill = red] table[y=vpp]{\constructSelTabAny};     
+
+\nextgroupplot[ymode=log,
+               ylabel={$t_d[ms]$},
+               title={Czas trwania sygnału},
+               ]
+\addplot [fill = green] table[y=dt]{\constructSelTabAny};;
+\nextgroupplot[ymax=5,
+               ylabel={$Q[b.j.]$},
+               ytick distance = 1,
+               title={Ocena jakości sygnału},
+               ]
+\addplot [fill = blue] table[y=jakość]{\constructSelTabAny};                 
+\end{groupplot}
+\end{tikzpicture}
+
+\caption{Zestawienie parametrów sygnałów dla poszczególnych modeli projektowanego przetwornika na
+ podstawie tablicy \ref{fig:results_6_geomrtry}. Czujnik 6.}
+\label{fig:construct_11_statistic}
+\end{figure}
+
+
+
+\begin{table}[h]
     \caption{Ranking optymalizacji konstrukcji pod względem 
     napięcia międzyszczytowego $V_{pp}$ dla czujnika 6.}
     \label{fig:construction_6_rank_vpp}
@@ -101,13 +257,14 @@ Szczegółowo badane modele przetworników przedstawiono na rys. \ref{fig:constr
     every last row/.style={after row=\bottomrule},
     display columns/0/.style={column name={Np.}, column type = {r}},
     display columns/1/.style={string type,column name={Próbka}, column type = {l}},
-    display columns/2/.style={column name={$V_{pp} [\si{\volt}]$}, column type = {r}, fixed},
+    display columns/2/.style={column name={$V_{pp} [\si{\volt}]$}, column type = {r},
+    precision=2,fixed zerofill, column type = {r}, fixed},
     % skip rows between index={5}{20}
     ]
     {geometry_optymalization_6_vpp.csv}
 \end{table}
 
-\begin{table}[htbp]
+\begin{table}[h]
     \caption{Ranking optymalizacji pod względem 
     czasu trwania sygnału $dt$  dla czujnika 6.}
     \label{fig:construction_6_rank_dt}
@@ -123,12 +280,13 @@ Szczegółowo badane modele przetworników przedstawiono na rys. \ref{fig:constr
     every last row/.style={after row=\bottomrule},
     display columns/0/.style={column name={Np.}, column type = {r}},
     display columns/1/.style={string type,column name={Próbka}, column type = {l}},
-    display columns/2/.style={column name={$dt [\si{\milli\second}]$}}, column type = {r},
+    display columns/2/.style={column name={$dt [\si{\milli\second}]$}, column type = {r},
+    precision=2,fixed zerofill, column type = {r}, fixed},
     % skip rows between index={5}{20}
     ]{geometry_optymalization_6_dt.csv}
 \end{table}
   
-\begin{table}[htbp]
+\begin{table}[h]
     \caption{Ranking optymalizacji konstrukcji pod względem 
     oceny jakości sygnału $Q$ dla czujnika 6.}
     \label{fig:construction_6_rank__qa}

@@ -73,3 +73,75 @@
     ]
     {geometry_optymalization_6.csv}
 \end{table}
+
+\begin{table}[htpb]
+    \caption{Wartości sygnałów otrzymanych z przetwornika 1.1.
+    w układzie konstrukcyjnym rBcc dla różnych wartości energii wymuszenia}
+    \label{fig:results_11rBcc_char}
+
+    \centering
+    \pgfplotstabletypeset[
+    col sep = comma,
+    columns = {Np, x, Ec, vpp, dt, jakość, Uwagi },
+    sort,
+    sort cmp={int <},
+    sort key=Np,
+    every head row/.style={before row=\toprule,after row=\midrule},
+    every last row/.style={after row=\bottomrule},
+    % display columns/0/.style={string type,column name={}}
+    % display columns/1/.style={string type,column name={}},
+    % display columns/2/.style={string type,column name={}}
+    % display columns/3/.style={string type,column name={}}
+    % display columns/4/.style={string type,column name={}}
+    display columns/6/.style={string type,column name={}}
+    ]
+    {1.1rBcc_chart.csv}
+\end{table}
+
+\begin{table}[htpb]
+    \caption{Wartości sygnałów otrzymanych z przetwornika 1.1.
+    w układzie konstrukcyjnym S dla różnych wartości energii wymuszenia}
+    \label{fig:results_11S_char}
+
+    \centering
+    \pgfplotstabletypeset[
+    col sep = comma,
+    columns = {Np, x, Ec, vpp, dt, jakość, Uwagi },
+    sort,
+    sort cmp={int <},
+    sort key=Np,
+    every head row/.style={before row=\toprule,after row=\midrule},
+    every last row/.style={after row=\bottomrule},
+    % display columns/0/.style={string type,column name={}}
+    % display columns/1/.style={string type,column name={}},
+    % display columns/2/.style={string type,column name={}}
+    % display columns/3/.style={string type,column name={}}
+    % display columns/4/.style={string type,column name={}}
+    display columns/6/.style={string type,column name={}}
+    ]
+    {1.1S_chart.csv}
+\end{table}
+
+\begin{table}[htpb]
+    \caption{Wartości sygnałów otrzymanych z przetwornika 6.
+    w układzie konstrukcyjnym rBcc dla różnych wartości energii wymuszenia}
+    \label{fig:results_6rBcc_center_char}
+
+    \centering
+    \pgfplotstabletypeset[
+    col sep = comma,
+    columns = {Np, x, Ec, vpp, dt, jakość, Uwagi },
+    sort,
+    sort cmp={int <},
+    sort key=Np,
+    every head row/.style={before row=\toprule,after row=\midrule},
+    every last row/.style={after row=\bottomrule},
+    % display columns/0/.style={string type,column name={}}
+    % display columns/1/.style={string type,column name={}},
+    % display columns/2/.style={string type,column name={}}
+    % display columns/3/.style={string type,column name={}}
+    % display columns/4/.style={string type,column name={}}
+    display columns/6/.style={string type,column name={}}
+    ]
+    {6rB_center_chart.csv}
+\end{table}
