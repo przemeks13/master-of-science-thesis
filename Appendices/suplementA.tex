@@ -16,12 +16,12 @@
     sort key=probka,
     every head row/.style={before row=\toprule,after row=\midrule},
     every last row/.style={after row=\bottomrule},
-    % display columns/0/.style={string type,column name={}}
-    display columns/1/.style={string type,column name={}},
+    display columns/0/.style={string type,column name={Lp.}, column type={r}},
+    display columns/1/.style={string type,column name={Próbka}, column type={l}},
     % display columns/2/.style={string type,column name={}}
     % display columns/3/.style={string type,column name={}}
     % display columns/4/.style={string type,column name={}}
-    display columns/5/.style={string type,column name={}}
+    display columns/5/.style={string type,column name={Uwagi}}
     ]
     {selekcja_czujnika.csv}
 \end{table}
@@ -41,8 +41,8 @@
     sort key=Np,
     every head row/.style={before row=\toprule,after row=\midrule},
     every last row/.style={after row=\bottomrule},
-    % display columns/0/.style={string type,column name={}}
-    display columns/1/.style={string type,column name={}},
+    display columns/0/.style={string type,column name={Lp.}, column type={r}},
+    display columns/1/.style={string type,column name={Próbka}, column type={l}},
     % display columns/2/.style={string type,column name={}}
     % display columns/3/.style={string type,column name={}}
     % display columns/4/.style={string type,column name={}}
@@ -65,12 +65,12 @@
     sort key=Np,
     every head row/.style={before row=\toprule,after row=\midrule},
     every last row/.style={after row=\bottomrule},
-    % display columns/0/.style={string type,column name={}}
-    display columns/1/.style={string type,column name={}},
+    display columns/0/.style={string type,column name={Lp.}, column type={r}},
+    display columns/1/.style={string type,column name={Próbka}, column type={l}},
     % display columns/2/.style={string type,column name={}}
     % display columns/3/.style={string type,column name={}}
     % display columns/4/.style={string type,column name={}}
-    display columns/5/.style={string type,column name={}}
+    display columns/5/.style={string type,column name={Uwagi}}
     ]
     {geometry_optymalization_6.csv}
 \end{table}
@@ -83,7 +83,7 @@
     \centering
     \pgfplotstabletypeset[
     col sep = comma,
-    columns = {Np, x, Ec, vpp, dt, jakość, Uwagi },
+    columns = {Np, x, Ec, vpp, dt, jakość},
     sort,
     sort cmp={int <},
     sort key=Np,
@@ -94,7 +94,7 @@
     % display columns/2/.style={string type,column name={}}
     % display columns/3/.style={string type,column name={}}
     % display columns/4/.style={string type,column name={}}
-    display columns/6/.style={string type,column name={}}
+    % display columns/6/.style={string type,column name={}}
     ]
     {1.1rBcc_chart.csv}
 \end{table}
@@ -107,7 +107,7 @@
     \centering
     \pgfplotstabletypeset[
     col sep = comma,
-    columns = {Np, x, Ec, vpp, dt, jakość, Uwagi },
+    columns = {Np, x, Ec, vpp, dt, jakość},
     sort,
     sort cmp={int <},
     sort key=Np,
@@ -118,7 +118,7 @@
     % display columns/2/.style={string type,column name={}}
     % display columns/3/.style={string type,column name={}}
     % display columns/4/.style={string type,column name={}}
-    display columns/6/.style={string type,column name={}}
+    % display columns/6/.style={string type,column name={}}
     ]
     {1.1S_chart.csv}
 \end{table}
@@ -131,7 +131,7 @@
     \centering
     \pgfplotstabletypeset[
     col sep = comma,
-    columns = {Np, x, Ec, vpp, dt, jakość, Uwagi },
+    columns = {Np, x, Ec, vpp, dt, jakość},
     sort,
     sort cmp={int <},
     sort key=Np,
@@ -142,7 +142,7 @@
     % display columns/2/.style={string type,column name={}}
     % display columns/3/.style={string type,column name={}}
     % display columns/4/.style={string type,column name={}}
-    display columns/6/.style={string type,column name={}}
+    % display columns/6/.style={string type,column name={}}
     ]
     {6rB_center_chart.csv}
 \end{table}
