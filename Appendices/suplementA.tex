@@ -31,6 +31,7 @@
      dla różnych układów konstrukcyjnych}
     \label{fig:results_11_geometry}
 
+    % width = \linewidth,    
     \centering
     \pgfplotstabletypeset[
     col sep = comma,
@@ -45,7 +46,7 @@
     % display columns/2/.style={string type,column name={}}
     % display columns/3/.style={string type,column name={}}
     % display columns/4/.style={string type,column name={}}
-    display columns/5/.style={string type,column name={}}
+    display columns/5/.style={string type, column type = p{5cm}, column name={Uwagi}}
     ]
     {geometry_optymization_11.csv}
 \end{table}

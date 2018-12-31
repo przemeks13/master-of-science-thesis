@@ -32,11 +32,14 @@ onehalfspacing, % Single line spacing, alternatives: onehalfspacing or doublespa
 %liststotoc, % Uncomment to add the list of figures/tables/etc to the table of contents
 %toctotoc, % Uncomment to add the main table of contents to the table of contents
 %parskip, % Uncomment to add space between paragraphs
-%nohyperref, % Uncomment to not load the hyperref package
+% nohyperref, % Uncomment to not load the hyperref package
 headsepline, % Uncomment to get a line under the header
 chapterinoneline, % Uncomment to place the chapter title next to the number on one line
+% ptm,
 %consistentlayout, % Uncomment to change the layout of the declaration, abstract and acknowledgements pages to match the default layout
 ]{MastersDoctoralThesis} % The class file specifying the document structure
+
+
 
 \usepackage[utf8]{inputenc} % Required for inputting international characters
 \usepackage[T1]{fontenc} % Output font encoding for international characters
@@ -69,8 +72,8 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
 
 \geometry{
 	paper=a4paper, % Change to letterpaper for US letter
-	inner=2.5cm, % Inner margin
-	outer=3.8cm, % Outer margin
+	inner=3.5cm, % Inner margin
+	outer=2.5cm, % Outer margin
 	bindingoffset=.5cm, % Binding offset
 	top=1.5cm, % Top margin
 	bottom=1.5cm, % Bottom margin
@@ -82,7 +85,7 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
 %----------------------------------------------------------------------------------------
 
 \thesistitle{Badanie przetworników piezoelektrycznych} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
-\supervisor{dr. inż. Krzysztof \textsc{Budnik}} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
+\supervisor{dr inż. Krzysztof \textsc{Budnik}} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
 \examiner{} % Your examiner's name, this is not currently used anywhere in the template, print it elsewhere with \examname
 \degree{magistra elektrotechniki}%Praca dyplomowa % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
 \author{inż Przemysław \textsc{Sałapata}} % Your name, this is used in the title page and abstract, print it elsewhere with \authorname
@@ -102,63 +105,63 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
 }
 
 \begin{document}
+\fontfamily{ptm}\selectfont
 
-\frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
+% \frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
 % \bibliographystyle{plain}
 \pagestyle{plain} % Default to the plain heading style until the thesis style is called for the body content
+% \fancyfoot[R]{\thepage}
+% \rfoot{\thepage}
 
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
-
 \begin{titlepage}
-\begin{center}
+	\begin{center}
+		
+		\vspace*{.06\textheight}
+		{\scshape\LARGE \univname\par}%\vspace{1.5cm} % University name
 
-\vspace*{.06\textheight}
-{\scshape\LARGE \univname\par}\vspace{1.5cm} % University name
-\textsc{\Large Praca dyplomowa magisterska}\\[0.5cm] % Thesis type
+		% \vfill
 
-\HRule \\[0.4cm] % Horizontal line
-{\huge \bfseries \ttitle\par}\vspace{0.4cm} % Thesis title
-\HRule \\[1.5cm] % Horizontal line
- 
-\begin{minipage}[t]{0.4\textwidth}
-\begin{flushleft} \large
-\emph{Autor:}\\
-\href{mailto:przemyslaw.salapata1@gmail.com}{\authorname} % Author name - remove the \href bracket to remove the link
-\end{flushleft}
-\end{minipage}
-\begin{minipage}[t]{0.4\textwidth}
-\begin{flushright} \large
-\emph{Promotor:} \\
-\href{mailto:krzysztof.budnik@put.poznan.pl}{\supname} % Supervisor name - remove the \href bracket to remove the link  
-\end{flushright}
-\end{minipage}\\[3cm]
- 
-\vfill
+		% \large \textit{Praca dyplomowa spełniająca wymagania\\ dla otrzymania tytułu \degreename.}\\[0.3cm] % University requirement text
+		% \textit{}\\[0.4cm]
+		\groupname\\\deptname\\[2cm] % Research group name and department name
+		 
+		% \vfill
 
-\large \textit{Praca dyplomowa spełniająca wymagania\\ dla otrzymania tytułu \degreename.}\\[0.3cm] % University requirement text
-% \textit{}\\[0.4cm]
-\groupname\\\deptname\\[2cm] % Research group name and department name
- 
-\vfill
+		\textsc{\Large Praca dyplomowa magisterska}\\[0.5cm] % Thesis type
+		
+		\HRule \\[0.4cm] % Horizontal line
+		{\huge \bfseries \ttitle\par}\vspace{0.4cm} % Thesis title
+		\HRule \\[1.5cm] % Horizontal line
+		
+		% \begin{minipage}[t]{0.4\textwidth}
+		% 	\begin{flushleft} \large
+				\emph{Autor:}
+				\href{mailto:przemyslaw.salapata1@gmail.com}{\authorname} % Author name - remove the \href bracket to remove the link
+		% 	\end{flushleft}
+		% \end{minipage}
+		\\
+		% \begin{minipage}[t]{0.4\textwidth}
+		% 	\begin{flushright} \large
+				\emph{Promotor:}
+				\href{mailto:krzysztof.budnik@put.poznan.pl}{\supname} % Supervisor name - remove the \href bracket to remove the link  
+		% 	\end{flushright}
+		% \end{minipage}
+		\\[3cm]
 
-{\large \today}\\[4cm] % Date
+
+
+{\large Poznań, 2018}\\[4cm] % Date
 %\includegraphics{Logo} % University/department logo - uncomment to place it
- 
+
 \vfill
 \end{center}
 \end{titlepage}
 
-\mainmatter % Begin numeric (1,2,3...) page numbering
-%----------------------------------------------------------------------------------------
-%	ABSTRACT PAGE
-%----------------------------------------------------------------------------------------
-
-\begin{abstract}
-\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
-The Thesis Abstract is written here (and usually kept to just this page). The page is kept centered vertically so can expand into the blank space above the title too\ldots
-\end{abstract}
+\setcounter{page}{2}
+% \mainmatter % Begin numeric (1,2,3...) page numbering
 
 %----------------------------------------------------------------------------------------
 %	LIST OF CONTENTS/FIGURES/TABLES PAGES
@@ -166,9 +169,34 @@ The Thesis Abstract is written here (and usually kept to just this page). The pa
 
 \tableofcontents % Prints the main table of contents
 
-\listoffigures % Prints the list of figures
+%----------------------------------------------------------------------------------------
+%	ABSTRACT PAGE
+%----------------------------------------------------------------------------------------
 
-\listoftables % Prints the list of tables
+\begin{abstract}
+\thispagestyle{plain}
+\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
+Niniejsza praca dotyczy badania przetworników piezoelektrycznych pod kątem
+zastosowania ich w przemyśle rolniczym. We wstępie opisuje się samo zjawisko 
+piezoelektryczne, odkrywców zjawiska oraz jego fizyczne podstawy. Następnie
+wymienia się szczegółowe założenia przeznaczenia przetwornika piezoelektrycznego, 
+uściślając tym samym zakres pracy. W kolejnych krokach opisany jest przebieg
+eksperymentów. Począwszy od dyskusji metodyki badań, przez wybór przetworników,
+po optymalizację konstrukcji mechanicznej układu. Na końcu wyznacza się charakterystyki
+zoptymalizowanych konstrukcji przetworników oraz wyciąga wnioski poddając
+ocenie możliwość zastosowania takich rozwiązań w przemyśle rolniczym.
+\\[3cm]
+\textbf{Abstract:} The thesis concerns testing piezoelectric transducers, that
+can be used in the agricultural industry. The introduction describes the phenomenon 
+itself piezoelectri effect, discoverers of the phenomenon and its physical principle. 
+Next detailed assumptions for the purpose of the piezoelectric transducer are mentioned.
+It's clarifying the scope of work. In the next steps, the experiments are described.
+Starting from the discussion of the research methodology, through the choice 
+of transducers,
+for optimizing the mechanical structure of the system. Finally, characteristics 
+are determined optimized transducer designs and draws conclusions by subjecting
+assessing the applicability of such solutions in the agricultural industry.
+\end{abstract}
 
 %----------------------------------------------------------------------------------------
 %	SYMBOLS
@@ -225,5 +253,10 @@ The Thesis Abstract is written here (and usually kept to just this page). The pa
 \printbibliography[title=Literatura]
 
 %----------------------------------------------------------------------------------------
+
+\listoffigures % Prints the list of figures
+\listoftables % Prints the list of tables
+
+
 
 \end{document}  

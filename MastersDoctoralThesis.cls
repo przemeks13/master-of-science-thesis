@@ -280,7 +280,8 @@
 	\clearpairofpagestyles%
 	\automark[chapter]{chapter}
 	\ihead{\headmark}% Inner header
-	\ohead[\pagemark]{\pagemark}% Outer header
+	\ohead{}%[\pagemark]{\pagemark}% Outer header
+	\ofoot[\pagemark]{\pagemark}
 }
 \ifoot{}% Inner footer
 \ofoot{}% Outer footer
@@ -359,19 +360,19 @@ KOMA-script documentation for details.}]{fancyhdr}
 		#1%added to be able to have abstract more than one page long
 		\thispagestyle{plain}
 		\begin{center}
-			{\normalsize \MakeUppercase{\univname} \par}% University name in capitals
-			\bigskip
+		% 	{\normalsize \MakeUppercase{\univname} \par}% University name in capitals
+		% 	\bigskip
 			{\huge\textit{\abstractname} \par}
 			\bigskip
-			{\normalsize \facname \par}% Faculty name
-			{\normalsize \deptname \par}% Department name
-			\bigskip
-			{\normalsize \degreename\par}% Degree name
-			\bigskip
-			{\normalsize\bfseries \@title \par}% Thesis title
-			\medskip
-			{\normalsize \byname{} \authorname \par}% Author name
-			\bigskip
+		% 	{\normalsize \facname \par}% Faculty name
+		% 	{\normalsize \deptname \par}% Department name
+		% 	\bigskip
+		% 	{\normalsize \degreename\par}% Degree name
+		% 	\bigskip
+		% 	{\normalsize\bfseries \@title \par}% Thesis title
+		% 	\medskip
+		% 	{\normalsize \byname{} \authorname \par}% Author name
+		% 	\bigskip
 		\end{center}
 	}
 	{
@@ -523,9 +524,9 @@ bookmarksopen=true,
 bookmarksopenlevel=0,
 hypertexnames=false,
 colorlinks=true,% Set to false to disable coloring links
-citecolor=magenta,% The color of citations
-linkcolor=red,% The color of references to document elements (sections, figures, etc)
-urlcolor=mdtRed,% The color of hyperlinks (URLs)
+citecolor=black,% The color of citations
+linkcolor=black,% The color of references to document elements (sections, figures, etc)
+urlcolor=black,% The color of hyperlinks (URLs)
 pdfstartview={FitV},
 unicode,
 breaklinks=true,
